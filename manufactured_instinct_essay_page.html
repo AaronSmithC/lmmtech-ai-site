@@ -1,0 +1,64 @@
+<h2 class="sr-only">Essay: Machine learning, or manufactured instinct?</h2>
+
+<style>
+  .essay-wrap { max-width: 640px; margin: 0 auto; padding: 3rem 1.25rem 4rem; font-family: var(--font-sans); color: var(--color-text-primary); }
+  .essay-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 1rem; }
+  .essay-title { font-family: var(--font-serif); font-size: 38px; line-height: 1.15; font-weight: 500; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+  .essay-deck { font-family: var(--font-serif); font-size: 18px; line-height: 1.5; color: var(--color-text-secondary); font-style: italic; margin: 0 0 2.5rem; max-width: 520px; }
+  .essay-rule { width: 48px; height: 1px; background: var(--color-text-tertiary); margin: 0 0 2.5rem; border: 0; }
+  .essay-body p { font-size: 17px; line-height: 1.7; margin: 0 0 1.5rem; color: var(--color-text-primary); }
+  .essay-body p.lede::first-letter { font-family: var(--font-serif); font-size: 56px; line-height: 0.9; float: left; padding: 6px 10px 0 0; font-weight: 500; }
+  .essay-body em { font-style: italic; color: var(--color-text-primary); }
+  .essay-section-rule { width: 100%; height: 1px; background: var(--color-border-tertiary); margin: 2.5rem 0; border: 0; }
+  .essay-pull { font-family: var(--font-serif); font-size: 22px; line-height: 1.4; font-style: italic; color: var(--color-text-primary); border-left: 2px solid var(--color-text-tertiary); padding: 4px 0 4px 1.25rem; margin: 2.5rem 0; border-radius: 0; }
+  .essay-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--color-border-tertiary); display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); letter-spacing: 0.04em; }
+  .essay-footer a { color: var(--color-text-secondary); text-decoration: none; border-bottom: 0.5px solid var(--color-border-secondary); padding-bottom: 1px; }
+  .essay-footer a:hover { color: var(--color-text-primary); }
+  @media (max-width: 560px) {
+    .essay-wrap { padding: 2rem 1rem 3rem; }
+    .essay-title { font-size: 30px; }
+    .essay-deck { font-size: 16px; }
+    .essay-body p { font-size: 16px; }
+    .essay-pull { font-size: 19px; }
+  }
+</style>
+
+<article class="essay-wrap">
+  <p class="essay-eyebrow">Notes · LMM Technologies</p>
+  <h1 class="essay-title">Machine learning, or manufactured instinct?</h1>
+  <p class="essay-deck">The word <em>learning</em> does most of the work in artificial intelligence — and it may be the wrong word.</p>
+  <hr class="essay-rule" />
+
+  <div class="essay-body">
+    <p class="lede">The word <em>learning</em> does a lot of work in artificial intelligence. It carries the human connotation — a mind sitting with a problem, forming concepts, building understanding over time. Much of what is currently called machine learning fits that picture poorly. A more accurate frame might be that we are not building artificial minds. We are manufacturing artificial instinct.</p>
+
+    <p>The distinction matters because it changes what we should expect from these systems, and what we should still build toward.</p>
+
+    <p>Living things do not arrive in the world unfinished. Evolution has run an enormous optimization process across geological time, compressing the structure of the environment into the structure of the organism itself. A foal stands within hours of birth. A bird navigates by inherited sensory machinery it never learned to use. Predators react to motion patterns reflexively, before they have any experience to draw on. None of this is reasoning, and none of it is learned in the lifetime of the individual animal. It is the residue of countless prior generations, baked into nervous systems as priors that the world rarely violates.</p>
+
+    <p>When a large neural network is trained on billions of examples, something structurally similar is happening on a compressed timescale. Patterns that succeed are reinforced, those that fail are suppressed, and the statistical regularities of the data are slowly pressed into the parameters of the model. A vision model ends up with edges and textures and object shapes embedded in its weights. A language model ends up with syntax, register, and the relational geometry of meaning. None of this is <em>understood</em> in the way a person understands. It is compressed environmental structure, made operational. That is what instinct is too. We have built, at extraordinary expense, a way to manufacture the kind of prior that evolution produced for free.</p>
+
+    <p>The comparison is unflattering in one important respect. Biological organisms adapt from astonishingly sparse experience. A child who touches a hot stove once does not need a second example. An athlete revises a movement pattern after a single failed repetition. Humans pull rules from tiny amounts of data because they have powerful priors and the right learning machinery sitting on top of those priors. Modern AI systems, by contrast, are extravagant in their demand for examples. They require enormous corpora, repeated optimization, and substantial compute, and they still struggle to do what a child does without effort.</p>
+
+    <blockquote class="essay-pull">The interesting implication is not that machines are bad at learning. It is that intelligence does not emerge from instinct alone.</blockquote>
+
+    <p>What we have built so far is the bottom layer. The rest of the stack — persistent memory, embodied continuity, intrinsic goals, the ability to test the world rather than just predict it — has not yet been built at comparable quality. Pattern engines without these higher layers behave more like trained reflexes than like adaptive minds.</p>
+
+    <p>The interesting question then becomes where this kind of manufactured instinct is most worth manufacturing. The answer points toward any domain that unfolds in time, carries hard structural constraints, and rewards the kind of compressed pattern recognition that takes a human expert years to build. Language is the obvious case, because it is also the case that has already worked. But it is not the only case, and arguably not the most interesting one. Movement, markets, music, code, biological signals, industrial telemetry — anything with the property that an experienced reader sees at a glance what a novice cannot — is a candidate domain for the same recipe.</p>
+
+    <p>The trained human expert is the proof of concept. A trader reading a tape, a clinician reading a gait, a radiologist reading a scan, a musician hearing a key change before it lands — these people are not solving problems analytically in real time. They are running compressed priors built up over thousands of hours of exposure to the underlying structure. And the structure is real. Markets have no-arbitrage conditions and accounting identities. Bodies have biomechanical limits. Language has grammar. Music has harmonic gravity. Experts have, through repeated exposure, internalized the regularities those constraints produce. The expertise is not in the reasoning. It is in the priors.</p>
+
+    <p>This is also what makes a foundation model for such a domain a different kind of object than a general-purpose statistical fit. The same recipe — large-scale training, learned tokenization, attention across long sequences — turns out to apply across domains that look on the surface like they have nothing in common. A motion sequence is not a price series, and a price series is not a melody. The substrate differs. But the work the model is doing is the same: compressing the regularities of a domain into priors that can be operationalized. What changes is what those priors are <em>about</em>. In motion, they are about cadence, coordination, the geometry of how injury and recovery look. In markets, they are about regime, flow, the texture of how positioning builds and breaks. In each case, the model that has compressed enough of the structure stops behaving like a curve fit and starts behaving more like a trained intuition.</p>
+
+    <p>Whether to call that instinct, or something else, is partly a question of taste. The behavior is what matters. And the behavior is interesting in the same way that an experienced human's behavior is interesting: it produces fast, structured responses to inputs that would overwhelm a deliberative system, and it does so because the relevant work has already been done — slowly, expensively, off-line — in producing the priors.</p>
+
+    <hr class="essay-section-rule" />
+
+    <p>The current generation of AI is best understood as the first half of an architecture. We have figured out how to manufacture priors at scale. We have not yet figured out how to put the rest of a mind on top of them. That is not a reason for disappointment, and it is not a reason for hype. It is a description of where the work is. The frontier is no longer whether large models can absorb the structure of a domain. It is which domains are worth absorbing, how deep the resulting priors can be made, and what an architecture built on them — instinct first, deliberation second — turns out to do.</p>
+  </div>
+
+  <footer class="essay-footer">
+    <span>lmmtech.ai</span>
+    <span>Notes · 2026</span>
+  </footer>
+</article>
