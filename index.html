@@ -3,99 +3,271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LMM Technologies | Foundation AI for Human Motion</title>
-  <meta name="description" content="LMM Technologies is building foundation AI for human motion across rehabilitation, sports, robotics, safety, and embodied systems." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body{margin:0;font-family:'Inter',sans-serif;background:#f5f7fb;color:#152033}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
-    header{background:#0d2342;color:#fff;padding:3rem 1rem;text-align:center}
-    header h1{margin:0;font-size:2.8rem}
-    header p{max-width:700px;margin:1rem auto 0;opacity:.9}
-    section{margin:2.5rem 0}
-    h2{color:#0d2342}
-    p,li{color:#51607a;line-height:1.7}
-    .grid{display:grid;gap:1rem}
-    .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-    .card{background:#fff;border:1px solid #dbe4f3;border-radius:14px;padding:1.2rem}
-    .pill{display:inline-block;background:#edf3ff;border:1px solid #d8e4fb;color:#163d99;padding:.3rem .6rem;border-radius:999px;font-size:.8rem;margin:.2rem}
-    footer{background:#0b1730;color:#ccd8ee;text-align:center;padding:1.5rem;margin-top:3rem}
-  </style>
+  <title>LMM Technologies — Foundation AI for Human Motion</title>
+  <meta name="description" content="LMM Technologies builds foundation models that treat human movement as a first-class sequence domain — the perceptual and predictive backbone for rehabilitation, sports, robotics, and embodied AI." />
+  <meta property="og:title" content="LMM Technologies — Foundation AI for Human Motion" />
+  <meta property="og:description" content="As frontier AI moves from text into the physical world, LMM builds the foundation model for the most fundamental physical signal: how bodies move." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:image" content="https://lmmtech.ai/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://lmmtech.ai/og-card.png" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <h1>Large Movement Models</h1>
-  <p>Foundation AI for motion, behavior, and embodied systems.</p>
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="brand">LMM&nbsp;<span class="brand-mark">·</span>&nbsp;Technologies</a>
+    <div class="nav-links">
+      <a href="#thesis">Thesis</a>
+      <a href="research.html">Research</a>
+      <a href="#domains" class="label-full">Domains</a>
+      <a href="mailto:contact@lmmtech.ai" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Foundation AI for human motion</div>
+      <h1>Large Movement Models</h1>
+      <p class="lede">A foundation model that treats movement as a first-class sequence domain — learning the structure of how bodies move through the physical world.</p>
+      <div class="hero-cta">
+        <a href="research.html" class="btn btn-primary">Read the research</a>
+        <a href="#thesis" class="btn btn-ghost">The thesis</a>
+      </div>
+      <div class="hero-meta">Developed by LMM Technologies — an Aegis Station Infrastructure company</div>
+    </div>
+
+    <div class="hero-figure">
+      <!-- Animated pose-skeleton motif -->
+      <svg class="skeleton" viewBox="0 0 200 280" role="img" aria-label="Stylized human pose skeleton in motion">
+        <!-- bones -->
+        <g class="bone">
+          <line x1="100" y1="46" x2="100" y2="120" />            <!-- spine -->
+          <line x1="100" y1="64" x2="60"  y2="92"  class="limb-anim" /> <!-- L upper arm -->
+          <line x1="60"  y1="92" x2="46"  y2="138" />            <!-- L forearm -->
+          <line x1="100" y1="64" x2="140" y2="92"  class="limb-anim" /> <!-- R upper arm -->
+          <line x1="140" y1="92" x2="154" y2="138" />            <!-- R forearm -->
+          <line x1="100" y1="120" x2="74"  y2="186" />           <!-- L thigh -->
+          <line x1="74"  y1="186" x2="66"  y2="248" />           <!-- L shin -->
+          <line x1="100" y1="120" x2="126" y2="186" class="limb-anim" /> <!-- R thigh -->
+          <line x1="126" y1="186" x2="134" y2="248" />           <!-- R shin -->
+        </g>
+        <!-- joints -->
+        <circle class="joint-core" cx="100" cy="34" r="13" />     <!-- head -->
+        <circle class="joint pulse" cx="100" cy="64"  r="4.5" />
+        <circle class="joint" cx="60"  cy="92"  r="4" />
+        <circle class="joint pulse" cx="46"  cy="138" r="4" />
+        <circle class="joint" cx="140" cy="92"  r="4" />
+        <circle class="joint pulse" cx="154" cy="138" r="4" />
+        <circle class="joint-core" cx="100" cy="120" r="5" />     <!-- hip -->
+        <circle class="joint" cx="74"  cy="186" r="4" />
+        <circle class="joint pulse" cx="66"  cy="248" r="4" />
+        <circle class="joint" cx="126" cy="186" r="4" />
+        <circle class="joint pulse" cx="134" cy="248" r="4" />
+      </svg>
+    </div>
+  </div>
 </header>
 
-<main class="wrap">
-
-<section>
-  <p>
-    LMM Technologies is building foundation models that treat motion as a first-class sequence domain across
-    rehabilitation, sports, robotics, safety, and other embodied AI applications.
-  </p>
-  <div>
-    <span class="pill">Sequence modeling for motion</span>
-    <span class="pill">Biomechanically grounded</span>
-    <span class="pill">Cross-domain</span>
+<!-- ── Stat band ──────────────────────────────────────────── -->
+<section class="section" style="padding:3rem 0;">
+  <div class="stat-band">
+    <div class="stat">
+      <div class="stat-num"><span>30%</span></div>
+      <div class="stat-label">lower motion-forecasting error vs. a standard transformer baseline</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">17k<span>+</span></div>
+      <div class="stat-label">clips processed across five independent capture sources, zero pipeline failures</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">capture modalities converge to one normalized representation</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">&lt;150<span>MB</span></div>
+      <div class="stat-label">model + pipeline footprint — runs on a single GPU, fully air-gapped</div>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>What is a Large Movement Model?</h2>
-  <p>
-    A Large Movement Model treats motion itself as the primary data type. Instead of learning from words and sentences,
-    it learns from sequences of movement—joint positions, trajectories, timing, and interactions.
-  </p>
-  <p>
-    Like language models for text, LMMs model how movement unfolds over time—supporting recognition, prediction,
-    and evaluation of motion across real-world environments.
-  </p>
-</section>
-
-<section>
-  <h2>Domains</h2>
-  <div class="grid grid-3">
-    <div class="card"><strong>Rehabilitation</strong><p>Gait, balance, and motion-quality analytics.</p></div>
-    <div class="card"><strong>Sports</strong><p>Biomechanics, fatigue signals, and performance patterns.</p></div>
-    <div class="card"><strong>Robotics & Safety</strong><p>Human intent modeling and motion-aware systems.</p></div>
+<!-- ── The moment (Prometheus framing) ────────────────────── -->
+<section class="section section-subtle" id="moment">
+  <div class="wrap">
+    <div class="feature">
+      <div>
+        <div class="eyebrow">The frontier is moving</div>
+        <p class="pull">Foundation models proved themselves on text. The race now is the physical world.</p>
+      </div>
+      <div class="prose" style="margin:0;">
+        <p class="prose-lead">In late 2025, Jeff Bezos took his first operational role since Amazon to co-found <strong>Project Prometheus</strong> — an AI company, since valued near $41B, built to make models that understand <em>physical</em> reality rather than just language. It is the loudest signal yet of a broad turn: the next era of AI is embodied.</p>
+        <p>Language was the first domain to fall to the foundation-model recipe because it was the easiest to digitize. It will not be the last. Any domain that unfolds in time and carries hard structural constraints — markets, biological signals, industrial telemetry, and above all <strong>movement</strong> — is a candidate for the same treatment.</p>
+        <p>LMM Technologies builds the foundation model for the most fundamental physical signal there is: <strong>how a body moves through space.</strong> Not a CAD assistant, not a robot — the motor prior underneath all of them.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>Pipeline</h2>
-  <ul>
-    <li>Capture → video or sensor streams</li>
-    <li>Pose extraction → structured keypoints</li>
-    <li>Normalization → clean, aligned motion sequences</li>
-    <li>Tokenization → motion as sequence tokens</li>
-    <li>Modeling → transformer / diffusion inference</li>
-  </ul>
+<!-- ── Thesis ─────────────────────────────────────────────── -->
+<section class="section" id="thesis">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The thesis</div>
+      <h2>Machine learning, or manufactured instinct?</h2>
+      <p>We are not building artificial minds. We are manufacturing artificial instinct — compressing the structure of a domain into priors the way evolution did for living things, only on a vastly shorter timescale.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-kicker">Priors, not reasoning</div>
+        <h3>Instinct is compressed structure</h3>
+        <p>A foal stands within hours; a trader reads a tape at a glance. Expertise lives in priors built from exposure, not deliberation. Large models manufacture exactly this kind of prior.</p>
+      </div>
+      <div class="card">
+        <div class="card-kicker">The recipe generalizes</div>
+        <h3>Movement is a sequence domain</h3>
+        <p>The same recipe — large-scale training, learned tokenization, attention over long sequences — applies wherever an expert sees what a novice cannot. Motion is a prime case, and a largely untouched one.</p>
+      </div>
+      <div class="card">
+        <div class="card-kicker">Instinct first</div>
+        <h3>The first half of an architecture</h3>
+        <p>Today's models are the bottom layer: manufactured instinct. The half still missing is learning — adapting from little because it stands on a great deal.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.6rem;">
+      <a href="manufactured_instinct_essay_page.html" class="btn btn-dark">Read the essay →</a>
+    </p>
+  </div>
 </section>
 
-<section>
-  <h2>Current Focus</h2>
-  <ul>
-    <li>Motion data pipelines and normalization</li>
-    <li>Tokenization strategies</li>
-    <li>Foundation model feasibility</li>
-    <li>Real-time motion systems</li>
-  </ul>
+<!-- ── What is an LMM / pipeline ──────────────────────────── -->
+<section class="section section-subtle" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>From raw video to motion intelligence</h2>
+      <p>A Large Movement Model treats motion itself as the primary data type — sequences of joint positions, trajectories, and timing — and learns how movement unfolds the way a language model learns how text unfolds.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipe-step"><div class="pipe-n">01</div><h4>Capture</h4><p>Video or sensor streams from any camera, frame rate, or skeleton format.</p></div>
+      <div class="pipe-step"><div class="pipe-n">02</div><h4>Pose</h4><p>OpenPose BODY_25 keypoints — 25 joints with per-joint confidence.</p></div>
+      <div class="pipe-step"><div class="pipe-n">03</div><h4>Normalize</h4><p>Hip-centered, torso-scaled, resampled to 15&nbsp;FPS with QC scoring.</p></div>
+      <div class="pipe-step"><div class="pipe-n">04</div><h4>Tokenize</h4><p>Frame, window, and body-part views — motion as multi-resolution tokens.</p></div>
+      <div class="pipe-step"><div class="pipe-n">05</div><h4>Model</h4><p>Hierarchical transformer or diffusion inference over the sequence.</p></div>
+    </div>
+    <div class="callout" style="margin-top:2rem;">
+      <strong>Multi-resolution by design.</strong> Movement happens at many timescales at once — frame-level dynamics, half-second phrases, whole-body coordination. LMM attends to all three simultaneously, which is what lets it stay coherent seconds into the future where flat models drift.
+    </div>
+    <p style="margin-top:1.5rem;"><a href="research.html">See the full technical overview — architecture, results, and cross-domain transfer →</a></p>
+  </div>
 </section>
 
-<section>
-  <h2>Contact</h2>
-  <p>
-    <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a>
-  </p>
+<!-- ── Domains ────────────────────────────────────────────── -->
+<section class="section" id="domains">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where it applies</div>
+      <h2>One motor prior, many domains</h2>
+      <p>The pipeline makes no assumption about <em>what kind</em> of movement it sees. In Phase&nbsp;I, motion dynamics learned on dance video transferred — unchanged — to clinical motion capture the model had never seen.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3>Rehabilitation</h3><p>Objective movement-quality scoring, recovery tracking, and compensatory-pattern detection — gait, balance, and motion analytics.</p></div>
+      <div class="card"><h3>Sports &amp; performance</h3><p>Technique assessment, fatigue signals, injury-risk estimation, and biomechanical pattern analysis.</p></div>
+      <div class="card"><h3>Robotics &amp; embodiment</h3><p>A pretrained human-motion prior for imitation learning, retargeting, and anticipatory human–robot coordination.</p></div>
+      <div class="card"><h3>Ergonomics &amp; safety</h3><p>Workplace movement monitoring, physical-demand quantification, and real-time anomaly detection.</p></div>
+      <div class="card"><h3>Behavioral analytics</h3><p>Gait recognition, anomalous-movement detection, and intent inference from body language.</p></div>
+      <div class="card"><h3>Human–computer interaction</h3><p>Motion-aware interfaces that read intent from how a person moves, not just what they touch.</p></div>
+    </div>
+  </div>
 </section>
 
-</main>
+<!-- ── Embodiment feature ─────────────────────────────────── -->
+<section class="section section-subtle" id="embodiment">
+  <div class="wrap">
+    <div class="feature">
+      <div>
+        <div class="eyebrow">Embodiment</div>
+        <h2 style="font-family:var(--font-serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.18;letter-spacing:-0.015em;margin:0.7rem 0 0;">A motor-cortex prior for any body</h2>
+      </div>
+      <div class="prose" style="margin:0;">
+        <p class="prose-lead">LMM internalizes that shoulders have range-of-motion limits, that gait is periodic, that balance demands continuous postural adjustment. This knowledge exists independently of any particular body.</p>
+        <p>Most humanoid and assistive robots are trained from scratch in simulation — expensive, with brittle sim-to-real transfer — or rely on hand-coded primitives. A model that already understands joint coordination, plausible trajectories, and multi-timescale dynamics gives a robot a head start: fine-tune from a rich prior instead of learning from zero.</p>
+        <p>The HTT's three temporal levels map directly onto a robot's actuator control, trajectory planning, and task sequencing. The body-part stream is exactly the coordination signal needed for bimanual manipulation and whole-body balance. And the 1–2&nbsp;second forecast horizon is precisely what lets a robot <strong>anticipate</strong> a human collaborator rather than merely react.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer>
-  © 2026 LMM Technologies Inc.
+<!-- ── Read more ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Go deeper</div>
+      <h2>Read the work</h2>
+    </div>
+    <div class="grid grid-3">
+      <a href="research.html" class="card">
+        <div class="card-kicker">Technical overview</div>
+        <h3>The Large Movement Model</h3>
+        <p>Pipeline, architectures, and Phase&nbsp;I results — including a diffusion model that cuts forecasting error 30% and motion dynamics that transfer across capture modalities.</p>
+        <span class="card-arrow">Read the research →</span>
+      </a>
+      <a href="manufactured_instinct_essay_page.html" class="card">
+        <div class="card-kicker">Notes</div>
+        <h3>Machine learning, or manufactured instinct?</h3>
+        <p>Why the word <em>learning</em> may be the wrong word — and what it means to build instinct first, deliberation second.</p>
+        <span class="card-arrow">Read the note →</span>
+      </a>
+      <a href="the_second_half_essay_page.html" class="card">
+        <div class="card-kicker">Notes</div>
+        <h3>The second half of the architecture</h3>
+        <p>If today's models are manufactured instinct, the part still missing is learning — and the measure of it is how little data it takes.</p>
+        <span class="card-arrow">Read the note →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ────────────────────────────────────────────── -->
+<section class="section section-subtle" id="contact">
+  <div class="wrap" style="text-align:center;max-width:640px;">
+    <div class="eyebrow">Get in touch</div>
+    <h2 style="font-family:var(--font-serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.3rem);margin:0.7rem 0 1rem;">Building the foundation model for movement</h2>
+    <p style="color:var(--color-text-secondary);margin-bottom:1.6rem;">For research, partnership, or pilot inquiries across rehabilitation, sports, robotics, and embodied systems.</p>
+    <a href="mailto:contact@lmmtech.ai" class="btn btn-dark">contact@lmmtech.ai</a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">LMM Technologies</div>
+      <div class="foot-tag">Foundation AI for human motion, behavior, and embodied systems.</div>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h5>Read</h5>
+        <a href="research.html">Technical overview</a>
+        <a href="manufactured_instinct_essay_page.html">Notes — manufactured instinct</a>
+        <a href="the_second_half_essay_page.html">Notes — the second half</a>
+      </div>
+      <div class="foot-col">
+        <h5>Connect</h5>
+        <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a>
+        <a href="https://aegisstation.com">Aegis Station Infrastructure</a>
+      </div>
+    </div>
+    <div class="foot-legal">© 2026 LMM Technologies Inc. · An Aegis Station Infrastructure company.</div>
+  </div>
 </footer>
 
 </body>

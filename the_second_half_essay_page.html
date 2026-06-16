@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The second half of the architecture — LMM Technologies</title>
+  <meta name="description" content="If today's models are manufactured instinct, the part still missing is learning — and the measure of it is how little data it takes. A note from LMM Technologies." />
+  <meta property="og:title" content="The second half of the architecture" />
+  <meta property="og:description" content="Instinct was the half we knew how to build. Learning is the half worth building next." />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:image" content="https://lmmtech.ai/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://lmmtech.ai/og-card.png" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="brand">LMM&nbsp;<span class="brand-mark">·</span>&nbsp;Technologies</a>
+    <div class="nav-links">
+      <a href="index.html#thesis">Thesis</a>
+      <a href="research.html">Research</a>
+      <a href="mailto:contact@lmmtech.ai" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<h2 class="sr-only">Essay: The second half of the architecture</h2>
+
+<style>
+  .essay-wrap { max-width: 640px; margin: 0 auto; padding: 3rem 1.25rem 4rem; font-family: var(--font-sans); color: var(--color-text-primary); }
+  .essay-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 1rem; }
+  .essay-title { font-family: var(--font-serif); font-size: 38px; line-height: 1.15; font-weight: 500; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+  .essay-deck { font-family: var(--font-serif); font-size: 18px; line-height: 1.5; color: var(--color-text-secondary); font-style: italic; margin: 0 0 2.5rem; max-width: 520px; }
+  .essay-rule { width: 48px; height: 1px; background: var(--color-text-tertiary); margin: 0 0 2.5rem; border: 0; }
+  .essay-body p { font-size: 17px; line-height: 1.7; margin: 0 0 1.5rem; color: var(--color-text-primary); }
+  .essay-body p.lede::first-letter { font-family: var(--font-serif); font-size: 56px; line-height: 0.9; float: left; padding: 6px 10px 0 0; font-weight: 500; }
+  .essay-body em { font-style: italic; color: var(--color-text-primary); }
+  .essay-section-rule { width: 100%; height: 1px; background: var(--color-border-tertiary); margin: 2.5rem 0; border: 0; }
+  .essay-pull { font-family: var(--font-serif); font-size: 22px; line-height: 1.4; font-style: italic; color: var(--color-text-primary); border-left: 2px solid var(--color-text-tertiary); padding: 4px 0 4px 1.25rem; margin: 2.5rem 0; border-radius: 0; }
+  .essay-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--color-border-tertiary); display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); letter-spacing: 0.04em; }
+  .essay-footer a { color: var(--color-text-secondary); text-decoration: none; border-bottom: 0.5px solid var(--color-border-secondary); padding-bottom: 1px; }
+  .essay-footer a:hover { color: var(--color-text-primary); }
+  @media (max-width: 560px) {
+    .essay-wrap { padding: 2rem 1rem 3rem; }
+    .essay-title { font-size: 30px; }
+    .essay-deck { font-size: 16px; }
+    .essay-body p { font-size: 16px; }
+    .essay-pull { font-size: 19px; }
+  }
+</style>
+
+<article class="essay-wrap">
+  <p class="essay-eyebrow">Notes · LMM Technologies</p>
+  <h1 class="essay-title">The second half of the architecture</h1>
+  <p class="essay-deck">If today's models are manufactured instinct, the part still missing is learning — and the measure of it is how little data it takes.</p>
+  <hr class="essay-rule" />
+
+  <div class="essay-body">
+    <p class="lede">A companion note argued that much of what we call machine learning is better understood as manufactured instinct: the same compression of environmental structure into priors that evolution performs for living things, run at great expense on a shorter clock. If that is right, it describes only the bottom layer. Instinct is what an organism is born with. It is not the whole of a mind, and it is not even the most interesting part. The part that does the work we actually admire — adjusting to a world that keeps changing, after only a little experience of it — is learning, and it sits on top.</p>
+
+    <p>The two are easy to blur because the field calls both of them learning. But they are different faculties with different economies. Instinct is paid for once, in bulk, before the individual arrives — billions of examples, enormous compute, a long offline process that yields a fixed prior. Learning is paid for continuously, in tiny installments, from whatever the world happens to present. A child touches a hot stove once. An athlete revises a movement after a single failed repetition. The remarkable thing is not that they learn but how little they need to — and the reason they need so little is that the instinct is already there. Learning is cheap precisely because it is not starting from nothing.</p>
+
+    <p>This reframes a problem that usually arrives wearing the costume of a defect. In applied machine learning the complaint is always the same: not enough data. The clinical recordings are too few, the rare condition has a dozen examples, the decisive event has happened twice. We treat this as a shortfall to engineer around. But scarcity is not an accident of particular datasets. It is the <em>signature</em> of the regime where learning, rather than instinct, is the thing being asked for. Where data is abundant, you are manufacturing a prior. Where it is scarce, you are being asked to learn — to do the hot-stove thing, to pull a rule from almost nothing by leaning on structure you already hold. The data was never going to be plentiful. If it were, it would not be learning.</p>
+
+    <blockquote class="essay-pull">Where data is abundant, you are manufacturing a prior. Where it is scarce, you are being asked to learn.</blockquote>
+
+    <p>It helps to separate three faculties rather than two. There is <em>instinct</em> — the structure pressed into a model's weights by large-scale training. There is <em>memory</em> — holding specific past episodes and consulting them when a similar moment returns. And there is <em>learning</em> proper — folding new experience back into the prior so the next response is permanently different. These are not the same thing, and the field is unevenly good at them. We have become very good at manufacturing instinct. We are passable at memory, mostly by retrieving past examples and setting them beside the present one. We are still poor at the third — sample-efficient updating of a strong prior from a handful of examples, the one thing biological learning makes look effortless.</p>
+
+    <p>In motion this is concrete rather than abstract. A foundation model trained on a large, diverse corpus of human movement has the instinct: it knows, in the only sense a model can, that gait is periodic, that joints have limits, that balance is continuous. Asking it to recognize one patient's particular compensation from a few recorded sessions is not asking it to learn how bodies move. It is asking it to learn <em>this</em> body, quickly, on top of everything it already holds. That is the hot-stove problem in clinical clothing, and it is the part that is genuinely unsolved — not the prior, but the adaptation on top of it.</p>
+
+    <p>There is a clean test of whether instinct can stand in for learning, and it is the rare event. We met it most sharply not in motion but in another domain we have been applying the same architecture to — a structured signal that unfolds in time, where the moments that matter most are the ones with the fewest examples in the record. The temptation there is to manufacture the missing experience: train a generator on what you have and synthesize the rest. It works for the typical case and fails exactly where it counts. A generator reproduces an ordinary stretch convincingly because it has seen thousands of them. It produces a smoothed average of the rare, decisive event because it has seen it twice. The model then validates beautifully on data that has quietly hallucinated the very thing you needed it to know.</p>
+
+    <p>That failure is not a nuisance. It is the boundary itself, drawn sharply. Instinct interpolates the typical; it cannot conjure the rare. Only exposure — actual experience of the unusual case — supplies it. This is the precise line between the two faculties: a manufactured prior can give you everything common in the world it was built from, and nothing genuinely new. The rare event is where learning has to be real, because no amount of prior cleverness substitutes for having been there.</p>
+
+    <hr class="essay-section-rule" />
+
+    <p>So the frontier is not quite where the headlines put it. It is not larger priors, more parameters, more of the instinct we already know how to manufacture. It is the second half of the architecture: the learning layer — the part that adapts from little because it stands on a great deal. And it has the useful property of being indifferent to domain. A model that can learn one body from a few sessions, and a model that can learn one rare regime from a few instances, are solving the same problem in different clothing — structured signal, scarce where it counts, a strong prior underneath. Instinct was the half we knew how to build. Learning is the half worth building next.</p>
+  </div>
+
+  <footer class="essay-footer">
+    <span><a href="manufactured_instinct_essay_page.html">← The first note: manufactured instinct</a></span>
+    <span>lmmtech.ai · Notes · 2026</span>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">LMM Technologies</div>
+      <div class="foot-tag">Foundation AI for human motion, behavior, and embodied systems.</div>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h5>Read</h5>
+        <a href="index.html">Home</a>
+        <a href="research.html">Technical overview</a>
+        <a href="manufactured_instinct_essay_page.html">Notes — manufactured instinct</a>
+      </div>
+      <div class="foot-col">
+        <h5>Connect</h5>
+        <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a>
+        <a href="https://aegisstation.com">Aegis Station Infrastructure</a>
+      </div>
+    </div>
+    <div class="foot-legal">© 2026 LMM Technologies Inc. · An Aegis Station Infrastructure company.</div>
+  </div>
+</footer>
+
+</body>
+</html>
