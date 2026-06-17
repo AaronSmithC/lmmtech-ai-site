@@ -235,7 +235,7 @@
 
   <!-- 9 -->
   <h2>9. Deployment</h2>
-  <p>The clinical product runs entirely within a customer's network — a single Docker container on one GPU-equipped machine, served to any browser on the local network. No cloud dependency, no external API calls, no data leaving the institution. The LMM-specific layers (pipeline, weights, web app, configuration) total under 150&nbsp;MB; the system can operate fully air-gapped.</p>
+  <p>The clinical product is designed to run entirely within a customer's network — a single Docker container on one GPU-equipped machine, served to any browser on the local network. By design there is no cloud dependency, no external API calls, and no data leaving the institution. The LMM-specific layers (pipeline, weights, web app, configuration) total under 150&nbsp;MB, and the system can operate fully air-gapped. A reference implementation exists; clinical validation is the next step.</p>
   <div class="arch-diagram">docker run -d --gpus all \
   -v /path/to/clinical/video:/data/input:ro \
   -v /path/to/output:/data/output \
