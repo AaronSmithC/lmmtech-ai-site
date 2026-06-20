@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--
+  Clerkwell — brochure / landing page.
+  "A smith shapes raw material into something useful. So does Clerkwell."
+  Single self-contained file. Brand: Fraunces + Inter, deep-eucalyptus accent,
+  the same calm "appliance" feel as the product UI.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clerkwell — private, paid-once AI for office document work</title>
+  <meta name="description" content="Clerkwell is a private, on-prem AI writing assistant for small offices. Staff click a labeled button, fill in a few blanks, and get a draft to review. It writes and summarizes — your real software still owns the data and the math. Nothing leaves the building.">
+  <meta property="og:title" content="Clerkwell — private AI for office document work">
+  <meta property="og:description" content="It writes and summarizes. A human checks it. Your real software still owns the data and the math. Runs on a box in your office — nothing leaves the building.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f4ef; --ink: #232020; --ink-soft: #6b6660; --line: #ddd8cf;
+      --card: #fffefb; --accent: #2f6d5e; --accent-soft: #e4ede9; --warn: #b5602f;
+      --radius: 12px; --shadow: 0 1px 2px rgba(35,32,32,.04), 0 10px 30px rgba(35,32,32,.07);
+      --max: 1060px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: 'Inter', system-ui, sans-serif; color: var(--ink);
+      background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 10; background: rgba(246,244,239,.85);
+      backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .mark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -.01em; color: var(--ink); }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a.lk { color: var(--ink-soft); font-size: .9rem; }
+    .nav-links a.lk:hover { color: var(--accent); }
+    .btn {
+      display: inline-block; background: var(--accent); color: #fff; font-weight: 600;
+      font-size: .92rem; padding: 11px 20px; border-radius: 9px; border: 1px solid var(--accent);
+      transition: filter .12s ease, transform .12s ease;
+    }
+    .btn:hover { filter: brightness(1.07); transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--accent); }
+    @media (max-width: 680px){ .nav-links a.lk { display: none; } }
+
+    /* Hero */
+    .hero { padding: 84px 0 64px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--accent);
+      background: var(--accent-soft); border: 1px solid #cfe0d9; padding: 6px 13px; border-radius: 999px; margin-bottom: 22px;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    h1 {
+      font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.08; letter-spacing: -.015em; margin: 0 0 18px; max-width: 16ch;
+    }
+    .lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 56ch; margin: 0 0 30px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .tagline { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 1.02rem; margin-top: 34px; }
+
+    /* Promise band */
+    .promise { background: var(--ink); color: #f4f1ea; padding: 56px 0; }
+    .promise .big {
+      font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+      line-height: 1.32; margin: 0; letter-spacing: -.01em;
+    }
+    .promise .big b { color: #fff; font-weight: 600; }
+    .promise small { display: block; margin-top: 18px; color: #b9b3a8; font-size: .95rem; }
+
+    /* Sections */
+    section.band { padding: 72px 0; }
+    .eyebrow { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 12px; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -.01em; margin: 0 0 14px; }
+    .section-intro { color: var(--ink-soft); max-width: 60ch; margin: 0 0 40px; font-size: 1.04rem; }
+
+    .grid { display: grid; gap: 18px; }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 860px){ .g3 { grid-template-columns: 1fr; } .g2 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .card .ico {
+      width: 42px; height: 42px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 1.15rem; margin-bottom: 16px;
+    }
+    .card h3 { font-size: 1.08rem; margin: 0 0 7px; font-weight: 600; }
+    .card p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+    .step-n { font-family: 'Fraunces', serif; color: var(--accent); font-size: 1.5rem; font-weight: 600; }
+
+    /* Verticals */
+    .verticals { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 12px; }
+    .vert {
+      background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px;
+      display: flex; align-items: center; gap: 11px; font-size: .94rem; font-weight: 500;
+    }
+    .vert .ve { font-size: 1.1rem; }
+
+    /* Why list */
+    .why { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px 40px; }
+    @media (max-width: 760px){ .why { grid-template-columns: 1fr; } }
+    .why h3 { font-size: 1.06rem; margin: 0 0 6px; display: flex; align-items: center; gap: 9px; }
+    .why .ck { color: var(--accent); }
+    .why p { margin: 0; color: var(--ink-soft); font-size: .96rem; }
+
+    /* Name note */
+    .name-note { background: var(--accent-soft); border-radius: var(--radius); padding: 34px 36px; }
+    .name-note p { margin: 0; color: #335; color: var(--ink); font-size: 1.02rem; max-width: 70ch; }
+    .name-note .mk { font-family: 'Fraunces', serif; font-weight: 600; }
+
+    /* CTA */
+    .cta-final { text-align: center; padding: 80px 0; }
+    .cta-final h2 { margin-bottom: 14px; }
+    .cta-final p { color: var(--ink-soft); margin: 0 auto 28px; max-width: 52ch; font-size: 1.06rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--ink-soft); font-size: .86rem; }
+    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .foot .mark { font-size: 1.05rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <span class="mark">Clerkwell</span>
+      <nav class="nav-links">
+        <a class="lk" href="#how">How it works</a>
+        <a class="lk" href="#trades">Who it's for</a>
+        <a class="lk" href="#why">Why Clerkwell</a>
+        <a class="btn" href="#contact">Ask about Clerkwell</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="pill"><span class="dot"></span> Runs in your office · nothing leaves the building</span>
+      <h1>Private AI that drafts your office paperwork.</h1>
+      <p class="lede">
+        Clerkwell turns a short form into a finished letter, notice, memo, or summary —
+        on a small box that lives in your office. Your staff click a labeled button, fill
+        in a few blanks, and get a draft to review. No cloud. No monthly bill. No data
+        leaving the building.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Ask about Clerkwell</a>
+        <a class="btn ghost" href="#how">See how it works →</a>
+      </div>
+      <p class="tagline">A smith shapes raw material into something useful. So does Clerkwell.</p>
+    </div>
+  </div>
+
+  <!-- Promise / boundary band -->
+  <div class="promise">
+    <div class="wrap">
+      <p class="big">
+        <b>It writes and summarizes. A&nbsp;human checks it.</b> Your real software still
+        owns the data and the math.
+      </p>
+      <small>Clerkwell drafts prose. It never calculates a figure and is never the system of record —
+        your accounting, EHR, or practice-management software stays in charge of the numbers.</small>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <section class="band" id="how">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps. No prompts to learn.</h2>
+      <p class="section-intro">
+        The whole tool is a screen of labeled buttons, set up for your trade. Anyone on
+        staff can use it on day one — if they can fill in a form, they can use Clerkwell.
+      </p>
+      <div class="grid g3">
+        <div class="card">
+          <div class="step-n">1</div>
+          <h3>Pick a labeled button</h3>
+          <p>“Past-due reminder,” “Appointment notice,” “Estimate cover letter” — the buttons match the work you actually do.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">2</div>
+          <h3>Fill in a few blanks</h3>
+          <p>A short form asks for the names, dates, and amounts. Jot rough notes — Clerkwell shapes them into proper writing.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">3</div>
+          <h3>Review, then use it</h3>
+          <p>A clean draft appears in seconds. Edit anything, then copy or print. A person always approves before it goes out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it writes -->
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">What it does</p>
+      <h2>The everyday writing, handled.</h2>
+      <div class="grid g3" style="margin-top:30px">
+        <div class="card"><div class="ico">✉️</div><h3>Letters &amp; emails</h3><p>Customer letters, status updates, follow-ups — clear and on-brand, in your tone.</p></div>
+        <div class="card"><div class="ico">📅</div><h3>Reminders &amp; notices</h3><p>Appointments, scheduling, past-due balances — courteous and consistent every time.</p></div>
+        <div class="card"><div class="ico">👥</div><h3>Memos from rough notes</h3><p>Turn half-sentences and bullet points into a clean internal memo for the team.</p></div>
+        <div class="card"><div class="ico">🔍</div><h3>Document summaries</h3><p>Drop in a PDF and get the key points, dates, and action items in plain language.</p></div>
+        <div class="card"><div class="ico">✍️</div><h3>Clean-up &amp; polish</h3><p>Paste anything rough and get a clear, professional version back — meaning intact.</p></div>
+        <div class="card"><div class="ico">＋</div><h3>Your own buttons</h3><p>Describe a new task in plain English; Clerkwell builds the button and the form for you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verticals -->
+  <section class="band" id="trades" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Built for your trade</p>
+      <h2>One product, fitted to your office.</h2>
+      <p class="section-intro">
+        Every install starts with a universal set of tasks, then adds buttons tuned to your
+        industry — set up for you before it ever reaches the front desk.
+      </p>
+      <div class="verticals">
+        <div class="vert"><span class="ve">⚖️</span> Law offices</div>
+        <div class="vert"><span class="ve">🦷</span> Dental &amp; medical</div>
+        <div class="vert"><span class="ve">📊</span> Accounting &amp; bookkeeping</div>
+        <div class="vert"><span class="ve">🔧</span> Auto repair</div>
+        <div class="vert"><span class="ve">🛠️</span> Trades &amp; HVAC</div>
+        <div class="vert"><span class="ve">🏡</span> Real estate</div>
+        <div class="vert"><span class="ve">🐾</span> Veterinary</div>
+        <div class="vert"><span class="ve">🕊️</span> Funeral homes</div>
+        <div class="vert"><span class="ve">🙏</span> Nonprofits, churches &amp; HOAs</div>
+        <div class="vert"><span class="ve">💇</span> Salon, spa &amp; fitness</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section class="band" id="why" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Why Clerkwell</p>
+      <h2>Quietly capable. Deliberately bounded.</h2>
+      <div class="why" style="margin-top:34px">
+        <div>
+          <h3><span class="ck">●</span> Nothing leaves the building</h3>
+          <p>The model runs on a box in your office. Client names, balances, records — none of it touches the cloud. For confidentiality-bound offices, that's the whole point.</p>
+        </div>
+        <div>
+          <h3><span class="ck">●</span> Paid once, not monthly</h3>
+          <p>Buy the box, own the tool. No per-seat subscription, no usage meter, no surprise bill — built for offices that are done renting their software.</p>
+        </div>
+        <div>
+          <h3><span class="ck">●</span> Safe by design</h3>
+          <p>Clerkwell writes; it never does your math or pretends to be your records. The one rule that makes it safe to drop into a tax office, a clinic, and a funeral home alike.</p>
+        </div>
+        <div>
+          <h3><span class="ck">●</span> Nothing to learn</h3>
+          <p>No prompts, no AI literacy required. Labeled buttons and short forms — the same muscle memory as any paper form your staff already fills out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Name note -->
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="name-note">
+        <p>
+          <span class="mk">The name.</span> A <em>smith</em> is a maker — one who forges raw iron
+          into something that works. A <em>clerk</em> writes and files, but never decides or computes.
+          Clerkwell forges your rough notes into a finished draft, and the “-well” is the maker's
+          mark: done well.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-final" id="contact">
+    <div class="wrap">
+      <h2>See it on your own paperwork.</h2>
+      <p>Clerkwell is rolling out to local offices now. Tell us your trade and we'll be in touch.</p>
+      <a class="btn" href="mailto:contact@lmmtech.ai?subject=Ask%20about%20Clerkwell">Ask about Clerkwell</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span class="mark">Clerkwell</span>
+      <span>Private, on-prem AI for office document work. &nbsp;·&nbsp; <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a></span>
+      <span>© 2026 LMM Tech</span>
+    </div>
+  </footer>
+
+</body>
+</html>
