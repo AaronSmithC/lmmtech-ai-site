@@ -124,6 +124,27 @@
     footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--ink-soft); font-size: .86rem; }
     .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
     .foot .mark { font-size: 1.05rem; }
+
+    /* Inquiry form */
+    .ask-form { max-width: 600px; margin: 36px auto 0; text-align: left; }
+    .ask-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 560px){ .ask-row { grid-template-columns: 1fr; } }
+    .ask-field { margin-bottom: 16px; }
+    .ask-field label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+    .ask-field label span { color: var(--accent); }
+    .ask-field input, .ask-field select, .ask-field textarea {
+      width: 100%; font: inherit; font-size: .95rem; color: var(--ink);
+      background: var(--card); border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px;
+    }
+    .ask-field textarea { resize: vertical; }
+    .ask-field input:focus, .ask-field select:focus, .ask-field textarea:focus { outline: none; border-color: var(--accent); }
+    #ask-submit { margin-top: 4px; }
+    #ask-submit:disabled { opacity: .6; cursor: default; }
+    .ask-error { font-size: .84rem; color: var(--warn); margin: 12px 0 0; }
+    .ask-fallback { font-size: .82rem; color: var(--ink-soft); margin-top: 14px; }
+    .ask-thanks { max-width: 600px; margin: 36px auto 0; background: var(--accent-soft); border: 1px solid #cfe0d9; border-radius: var(--radius); padding: 30px 34px; }
+    .ask-thanks h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.3rem; margin: 0 0 8px; color: var(--ink); }
+    .ask-thanks p { margin: 0; color: var(--ink-soft); }
   </style>
 </head>
 <body>
@@ -285,7 +306,53 @@
     <div class="wrap">
       <h2>See it on your own paperwork.</h2>
       <p>Clerkwell is rolling out to local offices now. Tell us your trade and we'll be in touch.</p>
-      <a class="btn" href="mailto:contact@lmmtech.ai?subject=Ask%20about%20Clerkwell">Ask about Clerkwell</a>
+
+      <form id="ask-form" class="ask-form">
+        <div class="ask-row">
+          <div class="ask-field"><label>Your name <span>*</span></label><input name="entry.1323116249" required autocomplete="name"></div>
+          <div class="ask-field"><label>Business name <span>*</span></label><input name="entry.1287560376" required autocomplete="organization"></div>
+        </div>
+        <div class="ask-row">
+          <div class="ask-field"><label>Your trade <span>*</span></label>
+            <select name="entry.1064380256" required>
+              <option value="" disabled selected>Choose one…</option>
+              <option>Law office</option>
+              <option>Dental / medical</option>
+              <option>Accounting / bookkeeping</option>
+              <option>Auto repair</option>
+              <option>Trades / HVAC / contractor</option>
+              <option>Real estate</option>
+              <option>Veterinary</option>
+              <option>Funeral home</option>
+              <option>Nonprofit / church / HOA</option>
+              <option>Salon / spa / fitness</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="ask-field"><label>Roughly how many staff?</label>
+            <select name="entry.943370278">
+              <option value="" selected>—</option>
+              <option>1–3</option>
+              <option>4–10</option>
+              <option>11–25</option>
+              <option>25+</option>
+            </select>
+          </div>
+        </div>
+        <div class="ask-row">
+          <div class="ask-field"><label>Email <span>*</span></label><input type="email" name="entry.1438621100" required autocomplete="email"></div>
+          <div class="ask-field"><label>Phone</label><input type="tel" name="entry.485352698" autocomplete="tel"></div>
+        </div>
+        <div class="ask-field"><label>Anything you'd like to ask?</label><textarea name="entry.2125467310" rows="3"></textarea></div>
+        <button type="submit" class="btn" id="ask-submit">Send</button>
+        <p id="ask-error" class="ask-error" hidden>Couldn't send just now — please email <a href="mailto:contact@lmmtech.ai?subject=Ask%20about%20Clerkwell">contact@lmmtech.ai</a>.</p>
+        <p class="ask-fallback">Prefer email? <a href="mailto:contact@lmmtech.ai?subject=Ask%20about%20Clerkwell">contact@lmmtech.ai</a></p>
+      </form>
+
+      <div id="ask-thanks" class="ask-thanks" hidden>
+        <h3>Thanks — we'll be in touch.</h3>
+        <p>We've got your note. Someone from Clerkwell will reach out about your office.</p>
+      </div>
     </div>
   </section>
 
@@ -296,6 +363,38 @@
       <span>© 2026 LMM Tech</span>
     </div>
   </footer>
+
+  <script>
+    // Submit the branded form to Google Forms (no-cors: the response is opaque,
+    // but the submission lands in the linked Sheet). Empty optional fields are
+    // dropped so they don't trip the multiple-choice validators.
+    (function () {
+      var ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdx6EjM3GAdCpIneL7ObembQu2kOSLamDSpgTN1JgPmvhHcnA/formResponse";
+      var form = document.getElementById('ask-form');
+      var thanks = document.getElementById('ask-thanks');
+      var errEl = document.getElementById('ask-error');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();               // only fires once native required-validation passes
+        var btn = document.getElementById('ask-submit');
+        errEl.hidden = true;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        var params = new URLSearchParams();
+        new FormData(form).forEach(function (value, key) {
+          if (String(value).trim() !== '') params.append(key, value);
+        });
+        fetch(ACTION, { method: 'POST', mode: 'no-cors', body: params })
+          .then(function () {
+            form.hidden = true; thanks.hidden = false;
+            thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          })
+          .catch(function () {
+            errEl.hidden = false;
+            btn.disabled = false; btn.textContent = 'Send';
+          });
+      });
+    })();
+  </script>
 
 </body>
 </html>
