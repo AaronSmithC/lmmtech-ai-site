@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--
+  Clerkwell for Mac — sub-page of the Clerkwell brochure.
+  Same brand as /clerkwell (Fraunces + Inter, deep-eucalyptus accent). The Mac
+  app is a native client for the in-office box; this page tells that story.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clerkwell for Mac — a native client for your office box</title>
+  <meta name="description" content="Clerkwell for Mac is a native macOS app that connects to the Clerkwell box on your office network. Streaming drafts, edit-in-place, copy with formatting — the same labeled buttons and the same Boundary, with a first-class Mac feel.">
+  <meta property="og:title" content="Clerkwell for Mac">
+  <meta property="og:description" content="A native Mac client for the in-office Clerkwell box. Same buttons, same Boundary, native feel.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f4ef; --ink: #232020; --ink-soft: #6b6660; --line: #ddd8cf;
+      --card: #fffefb; --accent: #2f6d5e; --accent-soft: #e4ede9; --warn: #b5602f;
+      --radius: 12px; --shadow: 0 1px 2px rgba(35,32,32,.04), 0 10px 30px rgba(35,32,32,.07);
+      --max: 1060px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: 'Inter', system-ui, sans-serif; color: var(--ink);
+      background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    header {
+      position: sticky; top: 0; z-index: 10; background: rgba(246,244,239,.85);
+      backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .mark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -.01em; color: var(--ink); }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a.lk { color: var(--ink-soft); font-size: .9rem; }
+    .nav-links a.lk:hover { color: var(--accent); }
+    .btn {
+      display: inline-block; background: var(--accent); color: #fff; font-weight: 600;
+      font-size: .92rem; padding: 11px 20px; border-radius: 9px; border: 1px solid var(--accent);
+      transition: filter .12s ease, transform .12s ease;
+    }
+    .btn:hover { filter: brightness(1.07); transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--accent); }
+    @media (max-width: 680px){ .nav-links a.lk { display: none; } }
+
+    .hero { padding: 72px 0 56px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 50px; align-items: center; }
+    @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; gap: 34px; } }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--accent);
+      background: var(--accent-soft); border: 1px solid #cfe0d9; padding: 6px 13px; border-radius: 999px; margin-bottom: 22px;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    h1 {
+      font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.1rem, 4.6vw, 3.2rem);
+      line-height: 1.08; letter-spacing: -.015em; margin: 0 0 18px; max-width: 15ch;
+    }
+    .lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 52ch; margin: 0 0 28px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .sub-note { font-size: .86rem; color: var(--ink-soft); margin-top: 18px; }
+
+    .promise { background: var(--ink); color: #f4f1ea; padding: 52px 0; }
+    .promise .big {
+      font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.4rem, 3.2vw, 2rem);
+      line-height: 1.32; margin: 0; letter-spacing: -.01em;
+    }
+    .promise .big b { color: #fff; font-weight: 600; }
+    .promise small { display: block; margin-top: 16px; color: #b9b3a8; font-size: .95rem; }
+
+    section.band { padding: 70px 0; }
+    .eyebrow { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 12px; }
+    h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -.01em; margin: 0 0 14px; }
+    .section-intro { color: var(--ink-soft); max-width: 60ch; margin: 0 0 40px; font-size: 1.04rem; }
+
+    .grid { display: grid; gap: 18px; }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 860px){ .g3 { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .card .ico {
+      width: 42px; height: 42px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 1.15rem; margin-bottom: 16px;
+    }
+    .card h3 { font-size: 1.08rem; margin: 0 0 7px; font-weight: 600; }
+    .card p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+    .step-n { font-family: 'Fraunces', serif; color: var(--accent); font-size: 1.5rem; font-weight: 600; }
+
+    .shot { border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; background: var(--card); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot-cap { text-align: center; color: var(--ink-soft); font-size: .85rem; margin: 12px 0 0; }
+    .showcase { max-width: 880px; margin: 0 auto; }
+
+    .name-note { background: var(--accent-soft); border-radius: var(--radius); padding: 34px 36px; }
+    .name-note p { margin: 0; color: var(--ink); font-size: 1.02rem; max-width: 70ch; }
+    .name-note .mk { font-family: 'Fraunces', serif; font-weight: 600; }
+
+    .cta-final { text-align: center; padding: 78px 0; }
+    .cta-final h2 { margin-bottom: 14px; }
+    .cta-final p { color: var(--ink-soft); margin: 0 auto 28px; max-width: 52ch; font-size: 1.06rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--ink-soft); font-size: .86rem; }
+    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .foot .mark { font-size: 1.05rem; }
+
+    /* Lightbox (click any screenshot to enlarge) */
+    .shot img { cursor: zoom-in; }
+    #lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+      background: rgba(20,18,16,.82); padding: 28px; cursor: zoom-out; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 96vw; max-height: 94vh; border-radius: 10px; box-shadow: 0 12px 50px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.12); cursor: zoom-out; }
+    #lightbox .lb-close { position: absolute; top: 16px; right: 22px; color: #f4f1ea; font-size: 2rem; line-height: 1; opacity: .85; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a class="mark" href="../">Clerkwell</a>
+      <nav class="nav-links">
+        <a class="lk" href="../">← Overview</a>
+        <a class="lk" href="#connect">Connect</a>
+        <a class="lk" href="#native">Native feel</a>
+        <a class="btn" href="../#contact">Ask about Clerkwell</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill"><span class="dot"></span> Now on macOS · connects to your office box</span>
+        <h1>Clerkwell, now on your Mac.</h1>
+        <p class="lede">
+          A native macOS app that talks to the Clerkwell box on your office network.
+          The same labeled buttons and the same bounded assistant — with streaming
+          drafts, edit-in-place, and copy-with-formatting that feel right at home on a Mac.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="../#contact">Ask about Clerkwell</a>
+          <a class="btn ghost" href="#connect">How it connects →</a>
+        </div>
+        <p class="sub-note">The box still does the work and holds the records — the Mac app is just a nicer window onto it.</p>
+      </div>
+      <div>
+        <figure class="shot" style="margin:0">
+          <img src="../img/mac-landing.png" width="1900" height="1290"
+               alt="The Clerkwell Mac app: a sidebar of labeled tasks and a “pick a button to start a draft” panel, with a status bar showing it’s connected to the office box.">
+        </figure>
+        <p class="shot-cap">A screen of labeled buttons — connected to the box on your network.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boundary band -->
+  <div class="promise">
+    <div class="wrap">
+      <p class="big">
+        <b>Same Boundary, native app.</b> It writes and summarizes; it never calculates a
+        figure and is never the system of record.
+      </p>
+      <small>The guardrail lives in the app's core, not its buttons — every draft, on every
+        platform, is the bounded assistant. The Mac client can't route around it.</small>
+    </div>
+  </div>
+
+  <!-- Connect -->
+  <section class="band" id="connect">
+    <div class="wrap">
+      <p class="eyebrow">Connect to your box</p>
+      <h2>Point it at your box once.</h2>
+      <p class="section-intro">
+        On first launch the app finds your Clerkwell box on the office network — by name,
+        or by an address you type in. After that it just reconnects each time you open it.
+      </p>
+      <div class="grid g3">
+        <div class="card">
+          <div class="step-n">1</div>
+          <h3>Open the app</h3>
+          <p>No account, no sign-in. The Mac app looks for the box on your local network the moment it launches.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">2</div>
+          <h3>Find it by name or address</h3>
+          <p>It tries the well-known name <code>clerkwell.local</code> first; if your network's set up differently, type the box's address instead.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">3</div>
+          <h3>Test &amp; connect</h3>
+          <p>One tap confirms the box is reachable, and you're in. The setting is remembered — and a status light shows online or offline at a glance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase screenshot -->
+  <section class="band" style="padding-top:0">
+    <div class="wrap showcase">
+      <figure class="shot" style="margin:0">
+        <img src="../img/mac-draft.png" width="1900" height="1290"
+             alt="The Clerkwell Mac app showing a finished customer-letter draft with the signer's name appended and a “review names, dates, and figures before sending” note.">
+      </figure>
+      <p class="shot-cap">Fill the blanks, watch the draft stream in, edit anything, then copy — signature appended, figures left exactly as you typed them.</p>
+    </div>
+  </section>
+
+  <!-- Native feel -->
+  <section class="band" id="native" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Native feel</p>
+      <h2>Built like a Mac app, not a web page in a frame.</h2>
+      <div class="grid g3" style="margin-top:30px">
+        <div class="card"><div class="ico">⌁</div><h3>Streams as it writes</h3><p>The draft appears word by word, with Stop and Regenerate right there — no spinner-and-wait.</p></div>
+        <div class="card"><div class="ico">✎</div><h3>Edit in place</h3><p>Tweak the draft inline before you use it. It's a starting point you finish, not a black box.</p></div>
+        <div class="card"><div class="ico">⧉</div><h3>Copy with formatting</h3><p>Copy clean rich text or plain text — paste straight into Mail, Pages, or your practice software.</p></div>
+        <div class="card"><div class="ico">📄</div><h3>Drop in a PDF</h3><p>Attach a document and review the extracted text before it drafts — local only, nothing uploaded.</p></div>
+        <div class="card"><div class="ico">✒︎</div><h3>Your signature, your tone</h3><p>Set the signer once and it's appended for you; the assistant writes the body, never the sign-off.</p></div>
+        <div class="card"><div class="ico">◐</div><h3>On-brand, always legible</h3><p>The warm Clerkwell look, tuned for a calm reading screen the front desk can live in all day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Name / reassurance -->
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="name-note">
+        <p>
+          <span class="mk">One Clerkwell, two windows.</span> The box on your network is still
+          the appliance — it runs the model and keeps every record in the building. The Mac
+          app is simply a first-class client onto it, so staff who live on a Mac get the
+          native experience without anything ever leaving the office.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Want it on your team's Macs?</h2>
+      <p>Clerkwell is rolling out to local offices now. Tell us your trade and we'll be in touch about the box and the Mac client.</p>
+      <a class="btn" href="../#contact">Ask about Clerkwell</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <a class="mark" href="../">Clerkwell</a>
+      <span>Private, on-prem AI for office document work. &nbsp;·&nbsp; <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a></span>
+      <span>© 2026 LMM Tech</span>
+    </div>
+  </footer>
+
+  <script>
+    // Click any screenshot to view it full-size; click anywhere (or Esc) to close.
+    (function () {
+      var box = document.createElement('div');
+      box.id = 'lightbox';
+      box.innerHTML = '<span class="lb-close" aria-hidden="true">×</span><img alt="">';
+      document.body.appendChild(box);
+      var big = box.querySelector('img');
+      document.querySelectorAll('.shot img').forEach(function (im) {
+        im.addEventListener('click', function () {
+          big.src = im.currentSrc || im.src; big.alt = im.alt || '';
+          box.classList.add('open'); document.body.style.overflow = 'hidden';
+        });
+      });
+      function close() { box.classList.remove('open'); document.body.style.overflow = ''; big.src = ''; }
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+
+</body>
+</html>

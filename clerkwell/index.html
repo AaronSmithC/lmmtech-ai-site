@@ -145,6 +145,35 @@
     .ask-thanks { max-width: 600px; margin: 36px auto 0; background: var(--accent-soft); border: 1px solid #cfe0d9; border-radius: var(--radius); padding: 30px 34px; }
     .ask-thanks h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.3rem; margin: 0 0 8px; color: var(--ink); }
     .ask-thanks p { margin: 0; color: var(--ink-soft); }
+
+    /* Screenshots */
+    .shot { border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; background: var(--card); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot-cap { text-align: center; color: var(--ink-soft); font-size: .85rem; margin: 12px 0 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 50px; align-items: center; }
+    @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; gap: 34px; } }
+    .platform { display: grid; gap: 60px; }
+    .prow { display: grid; grid-template-columns: 1fr 1.55fr; gap: 44px; align-items: center; }
+    .prow.flip { grid-template-columns: 1.55fr 1fr; }
+    .prow.flip .ptext { order: 2; }
+    .prow.flip .shot { order: 1; }
+    .prow .shot { margin: 0; }
+    .prow .tag { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 9px; }
+    .prow h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; margin: 0 0 10px; letter-spacing: -.01em; }
+    .prow p { margin: 0 0 14px; color: var(--ink-soft); font-size: 1rem; }
+    .prow .lk-more { font-weight: 600; font-size: .95rem; }
+    @media (max-width: 820px){
+      .prow, .prow.flip { grid-template-columns: 1fr; gap: 22px; }
+      .prow.flip .ptext, .prow.flip .shot { order: 0; }
+    }
+
+    /* Lightbox (click any screenshot to enlarge) */
+    .shot img { cursor: zoom-in; }
+    #lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center;
+      background: rgba(20,18,16,.82); padding: 28px; cursor: zoom-out; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 96vw; max-height: 94vh; border-radius: 10px; box-shadow: 0 12px 50px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.12); cursor: zoom-out; }
+    #lightbox .lb-close { position: absolute; top: 16px; right: 22px; color: #f4f1ea; font-size: 2rem; line-height: 1; opacity: .85; }
   </style>
 </head>
 <body>
@@ -154,8 +183,9 @@
       <span class="mark">Clerkwell</span>
       <nav class="nav-links">
         <a class="lk" href="#how">How it works</a>
-        <a class="lk" href="#trades">Who it's for</a>
+        <a class="lk" href="#platforms">Web &amp; Mac</a>
         <a class="lk" href="#why">Why Clerkwell</a>
+        <a class="lk" href="mac/">Mac app</a>
         <a class="btn" href="#contact">Ask about Clerkwell</a>
       </nav>
     </div>
@@ -163,20 +193,29 @@
 
   <!-- Hero -->
   <div class="hero">
-    <div class="wrap">
-      <span class="pill"><span class="dot"></span> Runs in your office · nothing leaves the building</span>
-      <h1>Private AI that drafts your office paperwork.</h1>
-      <p class="lede">
-        Clerkwell turns a short form into a finished letter, notice, memo, or summary —
-        on a small box that lives in your office. Your staff click a labeled button, fill
-        in a few blanks, and get a draft to review. No cloud. No monthly bill. No data
-        leaving the building.
-      </p>
-      <div class="cta-row">
-        <a class="btn" href="#contact">Ask about Clerkwell</a>
-        <a class="btn ghost" href="#how">See how it works →</a>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill"><span class="dot"></span> Runs in your office · nothing leaves the building</span>
+        <h1>Private AI that drafts your office paperwork.</h1>
+        <p class="lede">
+          Clerkwell turns a short form into a finished letter, notice, memo, or summary —
+          on a small box that lives in your office. Your staff click a labeled button, fill
+          in a few blanks, and get a draft to review. No cloud. No monthly bill. No data
+          leaving the building.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="#contact">Ask about Clerkwell</a>
+          <a class="btn ghost" href="#how">See how it works →</a>
+        </div>
+        <p class="tagline">A smith shapes raw material into something useful. So does Clerkwell.</p>
       </div>
-      <p class="tagline">A smith shapes raw material into something useful. So does Clerkwell.</p>
+      <div class="hero-shot">
+        <figure class="shot" style="margin:0">
+          <img src="img/web-letter.png" width="1900" height="1815"
+               alt="The Clerkwell web app: a short customer-letter form with the drafted result below and a “review before sending” note.">
+        </figure>
+        <p class="shot-cap">A labeled task, a few blanks, a draft to review — in any browser on the office network.</p>
+      </div>
     </div>
   </div>
 
@@ -233,6 +272,41 @@
         <div class="card"><div class="ico">🔍</div><h3>Document summaries</h3><p>Drop in a PDF and get the key points, dates, and action items in plain language.</p></div>
         <div class="card"><div class="ico">✍️</div><h3>Clean-up &amp; polish</h3><p>Paste anything rough and get a clear, professional version back — meaning intact.</p></div>
         <div class="card"><div class="ico">＋</div><h3>Your own buttons</h3><p>Describe a new task in plain English; Clerkwell builds the button and the form for you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two ways to run it -->
+  <section class="band" id="platforms" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Two ways to run it</p>
+      <h2>The office box, and now your Mac.</h2>
+      <p class="section-intro">
+        The same Clerkwell, the same bounded assistant — whether your staff open it in a
+        browser on the in-office appliance, or run the native Mac app that connects to it.
+      </p>
+      <div class="platform">
+        <div class="prow">
+          <div class="ptext">
+            <p class="tag">In-office web app</p>
+            <h3>Runs on the box. Opens in any browser.</h3>
+            <p>Nothing to install at the front desk — staff just open a page on the office
+              network. The model and every record stay on the box in the building.</p>
+          </div>
+          <figure class="shot"><img src="img/web-pastdue.png" width="1900" height="2171"
+            alt="The Clerkwell web app showing a past-due reminder form and its draft."></figure>
+        </div>
+        <div class="prow flip">
+          <div class="ptext">
+            <p class="tag">Native Mac app</p>
+            <h3>A first-class Mac client.</h3>
+            <p>Point it at your box once and it just works — streaming drafts, edit-in-place,
+              copy with formatting. Same buttons, same Boundary, native feel.</p>
+            <a class="lk-more" href="mac/">More about the Mac app →</a>
+          </div>
+          <figure class="shot"><img src="img/mac-draft.png" width="1900" height="1290"
+            alt="The Clerkwell native Mac app showing a customer-letter draft with a signature."></figure>
+        </div>
       </div>
     </div>
   </section>
@@ -393,6 +467,26 @@
             btn.disabled = false; btn.textContent = 'Send';
           });
       });
+    })();
+  </script>
+
+  <script>
+    // Click any screenshot to view it full-size; click anywhere (or Esc) to close.
+    (function () {
+      var box = document.createElement('div');
+      box.id = 'lightbox';
+      box.innerHTML = '<span class="lb-close" aria-hidden="true">×</span><img alt="">';
+      document.body.appendChild(box);
+      var big = box.querySelector('img');
+      document.querySelectorAll('.shot img').forEach(function (im) {
+        im.addEventListener('click', function () {
+          big.src = im.currentSrc || im.src; big.alt = im.alt || '';
+          box.classList.add('open'); document.body.style.overflow = 'hidden';
+        });
+      });
+      function close() { box.classList.remove('open'); document.body.style.overflow = ''; big.src = ''; }
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     })();
   </script>
 
