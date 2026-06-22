@@ -14,6 +14,10 @@
   <meta property="og:title" content="Clerkwell — private AI for office document work">
   <meta property="og:description" content="It writes and summarizes. A human checks it. Your real software still owns the data and the math. Runs on a box in your office — nothing leaves the building.">
   <meta property="og:type" content="website">
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,6 +44,8 @@
     }
     .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
     .mark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -.01em; color: var(--ink); }
+    .brand-lockup { display: inline-flex; align-items: center; gap: 9px; }
+    .brand-lockup .logo { display: block; border-radius: 6px; }
     .nav-links { display: flex; align-items: center; gap: 26px; }
     .nav-links a.lk { color: var(--ink-soft); font-size: .9rem; }
     .nav-links a.lk:hover { color: var(--accent); }
@@ -180,7 +186,7 @@
 
   <header>
     <div class="wrap nav">
-      <span class="mark">Clerkwell</span>
+      <span class="brand-lockup"><img class="logo" src="img/logo.png" alt="" width="26" height="26"><span class="mark">Clerkwell</span></span>
       <nav class="nav-links">
         <a class="lk" href="#how">How it works</a>
         <a class="lk" href="#platforms">Web &amp; Mac</a>
@@ -438,7 +444,7 @@
 
   <footer>
     <div class="wrap foot">
-      <span class="mark">Clerkwell</span>
+      <span class="brand-lockup"><img class="logo" src="img/logo.png" alt="" width="20" height="20"><span class="mark">Clerkwell</span></span>
       <span>Private, on-prem AI for office document work. &nbsp;·&nbsp; <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a></span>
       <span>© 2026 LMM Tech</span>
     </div>
