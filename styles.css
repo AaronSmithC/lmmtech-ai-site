@@ -285,6 +285,18 @@ tbody tr:last-child td { border-bottom: 2px solid var(--color-bg-ink); }
   white-space: pre; overflow-x: auto; color: var(--color-text-primary);
 }
 
+/* ── Media figure (video / image) ────────────────────────── */
+.media-fig { margin: 1.6rem 0 0.6rem; }
+.media-fig video, .media-fig img {
+  display: block; width: 100%; max-width: 680px; margin: 0 auto;
+  border: 1px solid var(--color-border-tertiary); border-radius: 10px;
+  background: var(--color-bg-subtle);
+}
+.media-fig figcaption {
+  font-size: 0.82rem; color: var(--color-text-tertiary); font-style: italic;
+  text-align: center; margin-top: 0.5rem;
+}
+
 /* ── Divider ─────────────────────────────────────────────── */
 .divider { border: none; height: 1px; background: linear-gradient(to right, transparent, var(--color-border-secondary), transparent); margin: 3rem 0; }
 

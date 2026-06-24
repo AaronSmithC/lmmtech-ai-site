@@ -166,7 +166,12 @@
   <div class="callout">
     <strong>A note on comparison fairness.</strong> The HTT's MSE comes from a single deterministic rollout; the diffusion model's is the mean of 10 samples, which reduces variance. The comparison is directionally valid, but the magnitude of improvement should be read with this methodological difference in mind.
   </div>
-  <p style="margin-top:1.3rem;"><strong>The two architectures are complementary.</strong> The HTT produces a single deterministic trajectory, frame by frame — suited to real-time, latency-sensitive applications. The diffusion model produces a distribution over possible futures in batch — suited to offline analysis, uncertainty quantification, and any setting where prediction quality outweighs latency.</p>
+  <p style="margin-top:1.3rem;"><strong>Beyond the training horizon, the difference becomes decisive.</strong> The 2-second forecast is only the start of the story. Extend it — roll a model forward on its own output — and the autoregressive HTT collapses toward a static pose: per-frame motion decays to near-zero within about a second and never recovers, the classic regression to the mean. Short-horizon error hides this, because predicting "hold still" scores acceptably on MSE while being dynamically inert. The diffusion model, generating each block in a single pass with no autoregressive feedback, keeps producing coherent, in-range motion far past the training window — sustaining roughly an order of magnitude more per-frame movement across 10+ seconds of rollout.</p>
+  <figure class="media-fig">
+    <video src="htt-vs-diffusion.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <figcaption>A 12-second forecast rolled from an identical 8-second context. The autoregressive HTT collapses to a near-static pose; the diffusion model sustains motion across the full horizon.</figcaption>
+  </figure>
+  <p style="margin-top:1.3rem;"><strong>That makes the diffusion model the usable forecaster.</strong> A deterministic rollout gives a sharp next frame and a serviceable first second, but the forecast cannot be extended; it coasts to a near-static pose and stays there. The diffusion model produces motion that stays alive across and well beyond the 2-second horizon — which is what any downstream use of a forecast actually requires. It is the architecture we build forward on.</p>
 
   <hr class="divider" />
 
@@ -191,15 +196,6 @@
   <h3>6.2 Scheduled sampling as a transfer mechanism</h3>
   <p>An unexpected result: scheduled sampling — introduced to reduce autoregressive drift — turns out to be a powerful cross-domain transfer mechanism. Models trained with it showed 54% lower teacher-forced error on held-out data than identical models trained without it. The interpretation: scheduled sampling forces the model to predict from imperfect inputs, and cross-domain inputs are inherently imperfect; models that learn to handle imperfect inputs generalize better.</p>
 
-  <h3>6.3 Target domains</h3>
-  <ul>
-    <li><strong>Rehabilitation &amp; clinical assessment:</strong> objective movement-quality quantification, recovery tracking, compensatory-pattern detection.</li>
-    <li><strong>Sports performance:</strong> technique assessment, fatigue detection, injury-risk estimation, training optimization.</li>
-    <li><strong>Robotics &amp; embodied AI:</strong> human-motion priors for motion planning, human–robot interaction, intent prediction.</li>
-    <li><strong>Ergonomics &amp; occupational safety:</strong> movement-pattern monitoring, workstation assessment, physical-demand quantification.</li>
-    <li><strong>Behavioral analytics:</strong> gait recognition, anomalous-movement detection, intent inference from body language.</li>
-  </ul>
-
   <hr class="divider" />
 
   <!-- 7 -->
@@ -208,7 +204,7 @@
     <li><strong>2D projection.</strong> Phase&nbsp;I uses 2D pose estimation; depth-dependent movements are geometrically compressed. 3D pose or multi-view triangulation would improve coverage.</li>
     <li><strong>Training-data diversity.</strong> The primary corpus is 10 dance genres — fast, diverse, full-body, but not specifically clinical. Domain-specific fine-tuning on rehabilitation exercises is a Phase&nbsp;II objective.</li>
     <li><strong>Clinical alignment not yet validated.</strong> Engineering metrics are strong; correlation with expert-assigned movement-quality ratings has not yet been formally evaluated.</li>
-    <li><strong>Autoregressive drift persists.</strong> The HTT reduces drift and scheduled sampling improves robustness, but frame-30 error is still ~6–10× frame-1 error for deterministic models. Diffusion largely avoids this but requires batch-mode inference.</li>
+    <li><strong>Autoregressive forecasts do not extend.</strong> Deterministic models predict a sharp next frame, but their motion decays toward a static pose within about a second, and rolling them forward only deepens the collapse — frame-30 error remains ~6–10× frame-1 error. This is an architectural property of autoregressive generation, not a tuning problem. The diffusion model avoids it by generating each forecast block in a single pass.</li>
     <li><strong>Evaluation methodology.</strong> HTT (single rollout) and diffusion (mean of 10) are not evaluated on identical terms; diffusion's advantage includes a variance-reduction benefit.</li>
   </ul>
 
@@ -226,7 +222,7 @@
         <tr><td>Decoder / generator</td><td>4-layer autoregressive decoder</td><td>6-layer denoiser, DDIM sampling</td></tr>
         <tr><td>Embedding</td><td>256-d, 8 heads, FFN 1024</td><td>256-d, 8 heads, FFN 1024</td></tr>
         <tr><td>Output</td><td>30 frames (2s), sequential</td><td>30 frames (2s), single pass</td></tr>
-        <tr><td>Inference</td><td>Deterministic, real-time capable</td><td>Stochastic, batch-mode</td></tr>
+        <tr><td>Inference</td><td>Deterministic; short-horizon (motion decays when rolled)</td><td>Stochastic, single-pass; sustains long-horizon motion</td></tr>
       </tbody>
     </table>
   </div>
@@ -234,20 +230,9 @@
   <hr class="divider" />
 
   <!-- 9 -->
-  <h2>9. Deployment</h2>
-  <p>The clinical product is designed to run entirely within a customer's network — a single Docker container on one GPU-equipped machine, served to any browser on the local network. By design there is no cloud dependency, no external API calls, and no data leaving the institution. The LMM-specific layers (pipeline, weights, web app, configuration) total under 150&nbsp;MB, and the system can operate fully air-gapped. A reference implementation exists; clinical validation is the next step.</p>
-  <div class="arch-diagram">docker run -d --gpus all \
-  -v /path/to/clinical/video:/data/input:ro \
-  -v /path/to/output:/data/output \
-  -p 8080:8080 \
-  lmmtech/motion-analyzer:v1</div>
-
-  <hr class="divider" />
-
-  <!-- 10 -->
-  <h2>10. Conclusion</h2>
-  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that both multi-resolution attention and diffusion-based generation learn meaningful motion structure from video-derived pose data. Trained on diverse full-body movement, the diffusion model reduces overall prediction error by 30% versus a standard transformer baseline, with a 31% improvement at the clinically relevant 2-second horizon.</p>
-  <p>Cross-domain evaluation on held-out data from a different capture modality confirms that the learned dynamics transfer — velocity prediction quality is essentially invariant to training corpus, even on domains the model never saw. These results establish feasibility for a new class of motion foundation models: domain-agnostic systems that serve as the perceptual and predictive backbone for applications across rehabilitation, sports, robotics, and beyond.</p>
+  <h2>9. Conclusion</h2>
+  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that both multi-resolution attention and diffusion-based generation learn meaningful motion structure from video-derived pose data. Trained on diverse full-body movement, the diffusion model reduces overall prediction error by 30% versus a standard transformer baseline, with a 31% improvement at the clinically relevant 2-second horizon — and where the autoregressive models freeze into a static pose past that horizon, the diffusion model keeps generating coherent motion, making it the practical basis for sustained forecasting.</p>
+  <p>Cross-domain evaluation on held-out data from a different capture modality confirms that the learned dynamics transfer — velocity prediction quality is essentially invariant to training corpus, even on domains the model never saw. These results establish feasibility for a new class of domain-agnostic motion foundation models — systems that learn movement structure transferable across capture modalities and movement types.</p>
 
   <p style="margin-top:2rem;">
     <a href="manufactured_instinct_essay_page.html" class="btn btn-dark">Read the thesis →</a>
