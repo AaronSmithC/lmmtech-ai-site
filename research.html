@@ -172,6 +172,11 @@
     <figcaption>A 12-second forecast rolled from an identical 8-second context. The autoregressive HTT collapses to a near-static pose; the diffusion model sustains motion across the full horizon.</figcaption>
   </figure>
   <p style="margin-top:1.3rem;"><strong>That makes the diffusion model the usable forecaster.</strong> A deterministic rollout gives a sharp next frame and a serviceable first second, but the forecast cannot be extended; it coasts to a near-static pose and stays there. The diffusion model produces motion that stays alive across and well beyond the 2-second horizon — which is what any downstream use of a forecast actually requires. It is the architecture we build forward on.</p>
+  <p style="margin-top:1.3rem;"><strong>What is the frozen pose hiding?</strong> The autoregressive forecast is not motionless — it is <em>amplitude-collapsed</em>. Scaling its output by a constant factor — a linear transform that changes each motion's magnitude but not its direction — reveals smooth, coherent movement beneath the stillness. The limitation is one of <em>magnitude</em>, not structure: minimizing squared error against an uncertain future rewards hedging toward the average pose, so the motion is predicted but shrunk. This is a diagnostic, not a fix — amplification makes the structure visible, it does not make the forecast more accurate.</p>
+  <figure class="media-fig">
+    <video src="autoregressive-amplitude-collapse.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <figcaption>The autoregressive forecast (left) and the same output linearly amplified ×6 (right), drawn at one shared scale. Amplification scales each motion's magnitude while preserving its direction — showing that the freeze is collapsed amplitude, not absent motion. This characterizes the model's behavior; it is not a more accurate forecast.</figcaption>
+  </figure>
 
   <hr class="divider" />
 
