@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snapshots of a Universe That No Longer Exists</title>
+<meta name="description" content="On quasars, obituaries, and why 'now' doesn't reach that far.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,560&family=Newsreader:ital,opsz,wght@0,6..72,380;0,6..72,500;1,6..72,380&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink-bg: #0a0a0c;
+    --bone: #e6e1d6;
+    --bone-dim: #9a968c;
+    --ember: #d4763b;
+    --silver: #7e838d;
+    --hairline: rgba(230, 225, 214, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--ink-bg);
+    color: var(--bone);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 380;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Hero: the archival plate ---------- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.85);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.15) 0%, rgba(10,10,12,0.0) 40%, rgba(10,10,12,0.92) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+    width: 100%;
+  }
+  .plate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: clamp(2.3rem, 6vw, 3.9rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    max-width: 18ch;
+  }
+  .dek {
+    margin-top: 1.3rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--bone-dim);
+    max-width: 42ch;
+  }
+  .byline {
+    margin-top: 2.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .byline span { color: var(--bone-dim); }
+
+  /* ---------- Essay body ---------- */
+  .essay {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .essay p {
+    margin-bottom: 1.6rem;
+  }
+  .essay p:first-of-type {
+    font-size: 1.35rem;
+  }
+  .essay em { font-style: italic; }
+
+  /* One-line paragraphs that act as beats */
+  .beat {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--bone);
+    margin: 3rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ---------- Figures as archival plates ---------- */
+  figure {
+    margin: 4rem calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+  }
+  figure .frame {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+  }
+  figcaption {
+    max-width: 72rem;
+    margin: 0.9rem auto 0;
+    padding: 0 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  figcaption .cap-id { color: var(--ember); }
+
+  /* ---------- Divider ---------- */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 3.4rem 0;
+    color: var(--silver);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  footer p {
+    padding-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    line-height: 2;
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  footer a:hover, footer a:focus-visible { color: var(--ember); border-color: var(--ember); }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .essay p:first-of-type { font-size: 1.2rem; }
+    .beat { font-size: 1.25rem; }
+    .hero { min-height: 72vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="quasar-plate.png" alt="An archival-style black-and-white photograph of a brilliant quasar jet crossing a dark starfield, the plate edges worn and cracked with age.">
+  <div class="hero-inner">
+    <div class="plate-label">Plate I &mdash; Lookback ~13.0 Gyr</div>
+    <h1>Snapshots of a Universe That No&nbsp;Longer Exists</h1>
+    <p class="dek">On quasars, obituaries, and why &ldquo;now&rdquo; doesn&rsquo;t reach that far.</p>
+    <p class="byline">Aaron Smith <span>&middot;</span> July 2026 <span>&middot;</span> ~4 min</p>
+  </div>
+</header>
+
+<main class="essay">
+
+  <p>I read a post about quasars.</p>
+
+  <p>It was a good post — the Euclid space telescope found 31 of the oldest ever documented, two of them dating to the universe&rsquo;s first 670 million years. Their light took roughly 13 billion years to get here. I&rsquo;ve seen a hundred posts like it. This one wouldn&rsquo;t leave me alone, and it took a day to figure out why.</p>
+
+  <p>Start with what a quasar is: a supermassive black hole in the act of eating. Gas and dust spiral in, friction and gravity heat the infall to millions of degrees, and the result outshines the entire host galaxy. It is the brightest sustained phenomenon in the universe, and it is temporary. A quasar is a phase, not a thing — tens of millions of years of gluttony, and then the fuel runs out.</p>
+
+  <p>Which means the quasars in that image almost certainly don&rsquo;t exist anymore. Not &ldquo;have changed.&rdquo; Don&rsquo;t exist. Quasar activity peaked around ten billion years ago, when the universe was denser and gas was everywhere, and it has been declining ever since. The engines survive — every dead quasar leaves behind a dormant supermassive black hole, and the quiet monster at the center of our own galaxy was plausibly a quasar once. But the light show is over. What Euclid photographed is a species of event that has largely gone extinct, visible only because the announcement of its existence is still in transit.</p>
+
+  <p>So far this is standard cosmic-perspective material. Light is slow, the universe is big, everything we see is old news. Even the Sun is eight minutes stale. Most people have absorbed this and filed it as trivia.</p>
+
+  <p class="beat">Here is the part that isn&rsquo;t trivia.</p>
+
+  <p>When you look at a photograph of a friend from ten years ago, you understand it as a stale record of a person who has a current state. The photo is old; your friend is not. There is a fact of the matter about what they look like right now, and the photo simply fails to capture it. Our entire intuition about images works this way: the picture is the past, the subject is the present, and the gap between them is a deficiency of the picture.</p>
+
+  <p>That intuition does not survive contact with a quasar 13 billion light-years away.</p>
+
+  <p>Ask the obvious question: fine, the image is old — what does that quasar look like <em>now</em>? And relativity answers: the question is not hard, it is malformed. &ldquo;Now&rdquo; across 13 billion light-years is not a fact waiting to be measured. Simultaneity at that separation is a bookkeeping convention — different observers, moving differently, will slice spacetime into &ldquo;now&rdquo; differently, and physics declares all their slicings equally valid. There is no cosmic present tense in which that object is currently doing anything. The snapshot is not a degraded view of a current state. As far as physics is concerned, the snapshot is all there is to see.</p>
+
+  <figure>
+    <div class="frame">
+      <img src="transparency-stack.png" alt="Translucent glass plates receding into darkness, each holding a progressively younger, hotter, denser starfield — the nearest plate calm and sparse, the farthest glowing violent orange.">
+    </div>
+    <figcaption>
+      <span class="cap-id">Plate II</span>
+      <span>The sky, sorted by radius — every shell of distance a different age of the universe</span>
+    </figcaption>
+  </figure>
+
+  <p>This flips the way we usually describe deep-field astronomy. We say telescopes look at faraway objects that happen to be old, as if distance were the point and age the side effect. It&rsquo;s closer to the truth the other way around. The night sky is a stack of transparencies: every shell of distance is a different age of the universe, all superimposed on the same piece of sky. Nearby, mature spiral galaxies going about their quiet business. Farther, the crowded violence of cosmic noon. Farther still, the first quasars igniting in a universe five percent of its current age. And beyond them, nothing bright at all — a genuine gap, the dark ages, until you hit the cosmic microwave background, which is the universe itself at 380,000 years old, before there was anything to see by.</p>
+
+  <p>The whole biography is on display at once, sorted by radius. You cannot look far without looking early. The universe does not permit it.</p>
+
+  <p>People sometimes call telescopes time machines, which is true but undersells it. A time machine implies you could also visit the present — that the past is one destination among several. It isn&rsquo;t. For everything beyond our immediate neighborhood, the past is the only destination. The deep universe has no &ldquo;meanwhile.&rdquo; It has only &ldquo;then,&rdquo; delivered at the speed of light, and a rigorous proof that asking for anything more recent is asking a question the universe doesn&rsquo;t recognize.</p>
+
+  <div class="rule">&sect;</div>
+
+  <p>I keep coming back to the two record-holders in that Euclid batch. Somewhere, 13 billion years ago, a black hole ate so violently that the flash is still crossing space, and we happened to build an instrument sensitive enough to catch it. The thing itself is long gone — burned out, gone quiet, its host galaxy merged and reshaped beyond recognition into something we will never identify. What arrived at the telescope is not a message from a distant place. It is the only remaining fact about an event, and now we have it.</p>
+
+  <p>That&rsquo;s what the post was really announcing, though it didn&rsquo;t say so. Not the discovery of 31 objects. The receipt of 31 obituaries — each one also, unavoidably, a birth announcement, because the deaths they report happened in a universe still young enough that they read like news.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aaron Smith &middot; <a href="index.html">lmmtech.ai</a></p>
+</footer>
+
+</body>
+</html>
