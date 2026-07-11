@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Too Fleeting and Too Far</title>
+<meta name="description" content="Organic molecules are everywhere. That is the bad news.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,560&family=Newsreader:ital,opsz,wght@0,6..72,380;0,6..72,500;1,6..72,380&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink-bg: #0a0a0c;
+    --bone: #e6e1d6;
+    --bone-dim: #9a968c;
+    --ember: #d4763b;
+    --silver: #7e838d;
+    --hairline: rgba(230, 225, 214, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--ink-bg);
+    color: var(--bone);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 380;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Hero: the archival plate ---------- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.82);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.15) 0%, rgba(10,10,12,0.0) 38%, rgba(10,10,12,0.93) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+    width: 100%;
+  }
+  .plate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+  }
+  .dek {
+    margin-top: 1.3rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--bone-dim);
+    max-width: 42ch;
+  }
+  .byline {
+    margin-top: 2.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .byline span { color: var(--bone-dim); }
+
+  /* ---------- Essay body ---------- */
+  .essay {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .essay p {
+    margin-bottom: 1.6rem;
+  }
+  .essay p:first-of-type {
+    font-size: 1.35rem;
+  }
+  .essay em { font-style: italic; }
+
+  .beat {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--bone);
+    margin: 3rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ---------- Figures as archival plates ---------- */
+  figure {
+    margin: 4rem calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+  }
+  figure .frame {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+  }
+  figcaption {
+    max-width: 72rem;
+    margin: 0.9rem auto 0;
+    padding: 0 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  figcaption .cap-id { color: var(--ember); }
+
+  /* ---------- Divider ---------- */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 3.4rem 0;
+    color: var(--silver);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  footer p {
+    padding-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    line-height: 2;
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  footer a:hover, footer a:focus-visible { color: var(--ember); border-color: var(--ember); }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .essay p:first-of-type { font-size: 1.2rem; }
+    .beat { font-size: 1.25rem; }
+    .hero { min-height: 72vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="spark-field.png" alt="An enormous dark field scattered with faint, isolated points of light — each a small pool of glow against the black, none close to another, none illuminated together.">
+  <div class="hero-inner">
+    <div class="plate-label">Plate I &mdash; Sparks, uncounted, unmet</div>
+    <h1>Too Fleeting and Too Far</h1>
+    <p class="dek">Organic molecules are everywhere. That is the bad news.</p>
+    <p class="byline">Aaron Smith <span>&middot;</span> July 2026 <span>&middot;</span> ~4 min</p>
+  </div>
+</header>
+
+<main class="essay">
+
+  <p>I saw a post about a rock.</p>
+
+  <p>Specifically, about organic molecules — amino acids, the carbon-chain precursors of biology — recovered from asteroid samples brought back to Earth. The poster was excited, and the excitement ran in a familiar direction: maybe life was delivered here. Maybe the ingredients rode in from space, which would mean they could ride in anywhere, which would mean we are probably not alone.</p>
+
+  <p>I understand the pull of that reading. I think it points at exactly the right fact and draws exactly the wrong comfort from it.</p>
+
+  <p>The fact is solid. The building blocks of life are not special to Earth. Amino acids form in interstellar clouds and arrive intact on meteorites. Complex carbon compounds show up in the atmospheres of distant worlds and the tails of comets. The chemistry that precedes biology appears to be cheap, common, and everywhere. On this, the asteroid samples are just the latest confirmation of something we already suspected: the universe is generous with the raw materials.</p>
+
+  <p>Here is where the hopeful reading goes wrong. It treats abundance of ingredients as evidence for company. But run the logic forward instead of stopping at the happy part.</p>
+
+  <p>If the precursors are everywhere, then life — should it start — starts in scattered, independent pockets, seeded from the same cosmic pantry but cooking in isolation. No two kitchens in contact. And the volume that scatters them is not large in any sense a human intuition can hold. It is large enough that light itself, the fastest thing there is, takes billions of years to cross it. Abundance doesn&rsquo;t gather these instances together. It spreads them across the entire cosmos, one thin sprinkle at a time.</p>
+
+  <p>That&rsquo;s the first problem: distribution in space. There&rsquo;s a second, and it&rsquo;s worse.</p>
+
+  <p>Life is not only widely spaced. It is brief. Every instance we can reason about — including our own — occupies a sliver of time against the age of the universe. A biosphere flares up, persists for a while, and ends, whether by its star, its luck, or its own hand. Now combine the two. Widely scattered <em>and</em> short-lived means that for any two instances of life to make contact, their brief active windows must overlap <em>and</em> the light between them must have time to cross the gulf. Both conditions, at once, across billions of light-years.</p>
+
+  <p class="beat">They almost never will.</p>
+
+  <p>This is the part the asteroid excitement misses. The generosity of the chemistry doesn&rsquo;t reduce the isolation. It <em>is</em> the isolation. If life required some rare convergence found in one place in a trillion, you might get a few dense clusters, neighbors close enough to notice each other. Instead you get the opposite: a universal, low-probability lottery run everywhere, its winners smeared so thinly across space and time that no two tickets ever sit close enough, or contemporaneous enough, to shake hands. Ubiquity is precisely what guarantees loneliness. Spread the lottery across the whole sky and you ensure the winners never meet.</p>
+
+  <p>So the picture inverts. We tend to imagine two failure modes: either life is rare and we&rsquo;re alone, or life is common and we have company. This suggests a third, and it&rsquo;s the cruelest of the three. Life is common — and we are alone anyway. Not for lack of neighbors, but because &ldquo;neighbor&rdquo; is a spatial word, and the neighbors are separated by distances that also happen to be durations. By the time their light reaches us they are long gone, and ours reaches no one who is there to receive it. Everyone is out there. No one is reachable. The cosmos is crowded and empty at the same time, and for the same reason.</p>
+
+  <figure>
+    <div class="frame">
+      <img src="spark-field-wide.png" alt="Scattered points of warm light against total blackness, each glowing alone in its own small halo, none close to another." loading="lazy">
+    </div>
+    <figcaption>
+      <span class="cap-id">Plate II</span>
+      <span>The field is not empty — it has just never been illuminated all at once</span>
+    </figcaption>
+  </figure>
+
+  <p>I keep circling one image. Picture every instance of life that has ever ignited in the universe as a brief spark on an enormous dark field — each one flaring, glowing, and going out. There are, perhaps, a great many of them. But they do not light up together, and they do not stand close. Each spark lives and dies inside its own small pool of light, having never learned that any of the others were ever there at all. The field is not empty. It has just never been illuminated all at once.</p>
+
+  <div class="rule">&sect;</div>
+
+  <p>There is one way out, and it&rsquo;s the very thing the original poster was excited about — which is the part I find genuinely beautiful, once it&rsquo;s turned around.</p>
+
+  <p>Panspermia. Delivery. If life, or its near-precursors, can travel — riding the asteroids and comets that fling material between worlds and possibly between stars — then the sparks are not fully independent after all. A single genesis could be smeared across many rocks, many worlds, seeding relatives instead of strangers. That wouldn&rsquo;t defeat the distances. It would do something subtler: it would make the distant life <em>related</em> to us rather than merely parallel to us. Not company we can talk to. Family we&rsquo;ll never meet, but family.</p>
+
+  <p>So the asteroid samples aren&rsquo;t evidence that we have neighbors. The distances and the durations already foreclose that. They&rsquo;re a hint at the only loophole the universe seems to allow — not a way to end the isolation, but a way to not be quite so alone inside it. The delivery doesn&rsquo;t bring us company.</p>
+
+  <p class="beat">It brings us kin.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aaron Smith &middot; <a href="index.html">lmmtech.ai</a></p>
+</footer>
+
+</body>
+</html>
