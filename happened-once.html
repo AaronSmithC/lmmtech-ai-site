@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What If Life Only Happened Once?</title>
+<meta name="description" content="Every organism on Earth is a variation on a single experiment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,560&family=Newsreader:ital,opsz,wght@0,6..72,380;0,6..72,500;1,6..72,380&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink-bg: #0a0a0c;
+    --bone: #e6e1d6;
+    --bone-dim: #9a968c;
+    --ember: #d4763b;
+    --silver: #7e838d;
+    --hairline: rgba(230, 225, 214, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--ink-bg);
+    color: var(--bone);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 380;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Hero: the archival plate ---------- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.82);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.15) 0%, rgba(10,10,12,0.0) 38%, rgba(10,10,12,0.93) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+    width: 100%;
+  }
+  .plate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 17ch;
+  }
+  .dek {
+    margin-top: 1.3rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--bone-dim);
+    max-width: 42ch;
+  }
+  .byline {
+    margin-top: 2.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .byline span { color: var(--bone-dim); }
+
+  /* ---------- Essay body ---------- */
+  .essay {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .essay p {
+    margin-bottom: 1.6rem;
+  }
+  .essay p:first-of-type {
+    font-size: 1.35rem;
+  }
+  .essay em { font-style: italic; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 3.4rem 0 1.6rem;
+    color: var(--bone);
+  }
+
+  .beat {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--bone);
+    margin: 3rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ---------- Figures as archival plates ---------- */
+  figure {
+    margin: 4rem calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+  }
+  figure .frame {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+  }
+  figcaption {
+    max-width: 72rem;
+    margin: 0.9rem auto 0;
+    padding: 0 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  figcaption .cap-id { color: var(--ember); }
+
+  /* ---------- Divider ---------- */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 3.4rem 0;
+    color: var(--silver);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  footer p {
+    padding-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    line-height: 2;
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  footer a:hover, footer a:focus-visible { color: var(--ember); border-color: var(--ember); }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .essay p:first-of-type { font-size: 1.2rem; }
+    .beat { font-size: 1.25rem; }
+    h2 { font-size: 1.6rem; }
+    .hero { min-height: 72vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="single-blueprint.png" alt="A dense, luminous tangle of living forms rendered in one shared palette, as if grown from a single source.">
+  <div class="hero-inner">
+    <div class="plate-label">Plate I &mdash; One genesis, ~3.8 Gyr</div>
+    <h1>What If Life Only Happened Once?</h1>
+    <p class="dek">Every organism on Earth is a variation on a single experiment.</p>
+    <p class="byline">Aaron Smith <span>&middot;</span> July 2026 <span>&middot;</span> ~4 min</p>
+  </div>
+</header>
+
+<main class="essay">
+
+  <p>Stand anywhere on Earth and you are surrounded by life. Bacteria coat your skin. Fungi thread the soil under your feet. The air you&rsquo;d call sterile is thick with microbes. Life saturates this planet so completely that finding a truly lifeless square centimeter takes real effort. And yet, for all that abundance, every last bit of it — every cell, every blade of grass, every blue whale — runs on the same blueprint. The same genetic code. The same handedness in its amino acids. The same underlying chemistry.</p>
+
+  <p class="beat">We are not the product of many experiments. We are iterations of a single one.</p>
+
+  <p>That is a stranger fact than it first sounds. Life on Earth appears to have emerged exactly once, somewhere between 3.5 and 4 billion years ago, and everything since has been variation on that one theme. There is no evidence of a second genesis — no shadow biosphere running on different rules, no unrelated tree of life growing quietly beside our own. Every organism that has ever lived is a cousin, in the deepest sense the word allows. We are all descended from the same chemical accident that happened, once, to learn how to copy itself.</p>
+
+  <p>Which raises a question most of us would rather not sit with: what if that accident was genuinely unlikely?</p>
+
+  <h2>The numbers game</h2>
+
+  <p>The reflexive answer is that it can&rsquo;t matter. The observable universe holds something like 10&sup2;&#8308; stars. Many have planets. A real fraction of those planets sit in the zone where liquid water can exist. Across billions of years and that many worlds, life elsewhere feels not just possible but inevitable. The universe has had an obscene number of chances to roll the dice.</p>
+
+  <p>But that intuition quietly assumes the odds are merely long, not astronomical. And those are different things. If the jump from complex chemistry to a self-replicating, evolving system demands a precise enough convergence — a specific enough sequence of molecular events, in a specific enough environment — then even 10&sup2;&#8308; tries might not be enough to expect it twice. Big numbers only guarantee an outcome when they&rsquo;re big relative to the odds against it. We don&rsquo;t know that they are. We have exactly one data point, and it&rsquo;s the one we&rsquo;d have regardless.</p>
+
+  <p>Here is the distinction that the raw star count papers over.</p>
+
+  <p>Chemistry is everywhere. That part is settled. Organic molecules drift in interstellar clouds, amino acids arrive intact on meteorites, complex carbon compounds form in the atmospheres of worlds we&rsquo;ll never touch. The raw materials of life are cheap and common and scattered across the whole cosmos. If life were a matter of assembling the right ingredients, it would be everywhere too.</p>
+
+  <p>But chemistry is not life. A pile of the right molecules is not a system that metabolizes, reproduces, and evolves, any more than a pile of bricks is a cathedral. Somewhere between the two lies a threshold — the moment inert chemistry becomes something that stays lit, that copies itself with enough fidelity to be shaped by selection. That threshold is what happened once on Earth. And nothing we know says it happens easily, or often, or ever again.</p>
+
+  <p class="beat">So the rarity, if it exists, is not in the material. It is in the spark.</p>
+
+  <figure>
+    <div class="frame">
+      <img src="the-spark.png" loading="lazy" alt="A single point of warm light igniting within a dark swirl of complex molecular chemistry, everything else around it unlit.">
+    </div>
+    <figcaption>
+      <span class="cap-id">Plate II</span>
+      <span>The materials are everywhere &mdash; the transition is not</span>
+    </figcaption>
+  </figure>
+
+  <h2>The weight of once</h2>
+
+  <p>We tend to treat &ldquo;are we alone&rdquo; as a question about ingredients and real estate — enough planets, enough water, enough time. But the single blueprint under our feet points somewhere else. If the ingredients are universal and the spark is rare, then a galaxy full of habitable, well-stocked, patiently waiting worlds tells us almost nothing. They can have every raw material and still be silent, because the hard part was never the materials. The hard part was the one improbable transition that no amount of stocked shelves can force.</p>
+
+  <p>And if that&rsquo;s true, then the abundance around us is not evidence of a fertile universe. It&rsquo;s the opposite. It&rsquo;s what a single success looks like from the inside — a lone spark that caught, then filled every crack of its one small world so thoroughly that its inhabitants mistake saturation for likelihood. We look at how much life there is here and assume the universe must be teeming. But we&rsquo;re not counting geneses. We&rsquo;re counting the descendants of one.</p>
+
+  <p>I don&rsquo;t know that life only happened once. Nobody does — that&rsquo;s the honest center of the whole question. It&rsquo;s possible the spark is easy and the sky is crowded. But it is also possible, fully consistent with everything we can see, that the transition from chemistry to life is so improbable that it has occurred exactly one time in the observable universe, and that we are it. Not the brightest light in a well-lit room. The only match that ever caught, in a cosmos otherwise made entirely of unlit fuel.</p>
+
+  <p>That possibility should change how we hold the ground under our feet. If life is common, we are a sample. If life happened once, we are not a sample of anything. We are the entire phenomenon — the only place the universe ever woke up — and the thin film of it clinging to this one rock is not a local abundance at all.</p>
+
+  <p class="beat">It is the whole inventory.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aaron Smith &middot; <a href="index.html">lmmtech.ai</a></p>
+</footer>
+
+</body>
+</html>
