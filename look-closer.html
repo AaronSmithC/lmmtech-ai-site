@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Look Closer</title>
+<meta name="description" content="The civilizations most likely to last are the ones least likely to broadcast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,560&family=Newsreader:ital,opsz,wght@0,6..72,380;0,6..72,500;1,6..72,380&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink-bg: #0a0a0c;
+    --bone: #e6e1d6;
+    --bone-dim: #9a968c;
+    --ember: #d4763b;
+    --silver: #7e838d;
+    --hairline: rgba(230, 225, 214, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--ink-bg);
+    color: var(--bone);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 380;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Hero: the archival plate ---------- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.82);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.15) 0%, rgba(10,10,12,0.0) 38%, rgba(10,10,12,0.93) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+    width: 100%;
+  }
+  .plate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 17ch;
+  }
+  .dek {
+    margin-top: 1.3rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--bone-dim);
+    max-width: 42ch;
+  }
+  .byline {
+    margin-top: 2.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .byline span { color: var(--bone-dim); }
+
+  /* ---------- Essay body ---------- */
+  .essay {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .essay p {
+    margin-bottom: 1.6rem;
+  }
+  .essay p:first-of-type {
+    font-size: 1.35rem;
+  }
+  .essay em { font-style: italic; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 3.4rem 0 1.6rem;
+    color: var(--bone);
+  }
+
+  .beat {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--bone);
+    margin: 3rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ---------- Figures as archival plates ---------- */
+  figure {
+    margin: 4rem calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+  }
+  figure .frame {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+  }
+  figcaption {
+    max-width: 72rem;
+    margin: 0.9rem auto 0;
+    padding: 0 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  figcaption .cap-id { color: var(--ember); }
+
+  /* ---------- Divider ---------- */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 3.4rem 0;
+    color: var(--silver);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+  }
+  .rule::before, .rule::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  footer p {
+    padding-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    line-height: 2;
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  footer a:hover, footer a:focus-visible { color: var(--ember); border-color: var(--ember); }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .essay p:first-of-type { font-size: 1.2rem; }
+    .beat { font-size: 1.25rem; }
+    h2 { font-size: 1.6rem; }
+    .hero { min-height: 72vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="quiet-star.png" alt="A single faint star at the center of an otherwise empty archival photographic plate, its emulsion scratched at the edges.">
+  <div class="hero-inner">
+    <div class="plate-label">Plate I &mdash; A quiet star, next door</div>
+    <h1>Look Closer</h1>
+    <p class="dek">The civilizations most likely to last are the ones least likely to broadcast.</p>
+    <p class="byline">Aaron Smith <span>&middot;</span> July 2026 <span>&middot;</span> ~5 min</p>
+  </div>
+</header>
+
+<main class="essay">
+
+  <p>For sixty years we have been searching for a technology and calling it a search for life.</p>
+
+  <p>The distinction sounds pedantic. It isn&rsquo;t. It has quietly shaped every antenna, every survey, every target list, and it may have shaped them wrong.</p>
+
+  <p>Start with the assumption underneath the whole enterprise: that someone is transmitting. Not leaking &mdash; transmitting. A beacon, deliberate or careless, loud enough to cross thousands of light-years and still register on a dish. Everything about the classical search follows from that premise. Point at the water hole. Look for the narrowband spike. Wait.</p>
+
+  <p class="beat">But ask what kind of civilization broadcasts.</p>
+
+  <p>Beacons are expensive. They are the behavior of a species with surplus energy, an expansionary temperament, and a reason to announce itself &mdash; a civilization in its growth phase, spending real power to shout into a void on the chance someone shouts back. We did it because we were young and it was thrilling and it was cheap relative to what we thought we&rsquo;d learn. That is not a permanent condition. It is a mood, and moods pass.</p>
+
+  <p class="beat">Now ask what kind of civilization lasts.</p>
+
+  <p>Nothing that grows forever survives arbitrary time; exponentials end, always, one way or another. Anything still around after a very long while has closed its loops, made peace with sufficiency, and stopped needing to expand in order to continue. It has become steady-state, because steady-state is the only state that runs indefinitely. And a civilization like that has almost nothing to broadcast. No frontier to advertise, no surplus to burn on a message, no particular reason to think the void owes it a reply.</p>
+
+  <h2>The empty intersection</h2>
+
+  <p>Put those two together and you get the problem at the center of the search. The trait that makes a civilization detectable in principle &mdash; that it lasts long enough to be there when you look &mdash; is anti-correlated with the trait that makes it detectable in practice. The longer-lived it is, the quieter it probably is. We have been aiming at the intersection of &ldquo;old enough to find&rdquo; and &ldquo;loud enough to hear,&rdquo; and that intersection may be nearly empty.</p>
+
+  <p>Our own case is the warning. Humanity&rsquo;s loud era is arguably closing already, seventy-odd years in. Broadcast television and high-power omnidirectional radio are giving way to fiber, to tight-beam satellite, to signals aimed precisely where they need to go and nowhere else. Efficiency is quiet. If our radio window turns out to be a century wide, then even a civilization that follows our exact path is detectable for one century out of however long it lasts &mdash; a rounding error against any lifespan worth the name. We are not the loud ones. We were briefly loud, on the way to somewhere else.</p>
+
+  <p>Which means radio was never a stage of intelligence. It is a contingency: one technology, in one medium, at one moment, for one purpose, on one planet. There could be people living in perfectly happy abundance on a world we can see from here, having never built a transmitter, having no need of one, having solved their problems in some other order entirely. They are not primitive. They are not hiding. They are simply not doing the one arbitrary thing our search is designed to notice.</p>
+
+  <p>So the search as constructed is not filtering for intelligence. It is filtering for intelligence that happens to be technological, and electromagnetic, and wasteful about it, and doing so inside our particular window. That is not a filter on aliens. It is a filter on aliens who resemble us, briefly, around 1974.</p>
+
+  <h2>The residue</h2>
+
+  <p>If nobody is shouting, then the only thing left to find is what a civilization cannot help emitting. Not a message &mdash; a residue. The chemical signature of an atmosphere that shouldn&rsquo;t be in equilibrium. Waste heat where there is no reason for warmth. A spectral line that no geology explains. These are not announcements. They are the unavoidable exhaust of something being alive and doing things, and they have the great virtue of not requiring their source to have any interest in us whatsoever.</p>
+
+  <figure>
+    <div class="frame">
+      <img src="residue-spectrum.png" loading="lazy" alt="An archival spectrogram plate: a horizontal band of absorption lines with a single warm spike glowing at its center.">
+    </div>
+    <figcaption>
+      <span class="cap-id">Plate II</span>
+      <span>Not a message &mdash; a residue</span>
+    </figcaption>
+  </figure>
+
+  <p>They also have one hard property: they are faint. A whisper carries as far as a whisper carries. Unintentional signals are not weak because their sources are far away; they are weak because nobody is trying, and no amount of distance-correction saves you from a signal that was never meant to be heard. Which settles the question of where to look. Not because far away is dead &mdash; inside our own galaxy, a thousand-year lookback is nothing against any lifespan worth detecting, and a technosignature at any range would still be the most important measurement ever made. But because far away is silent by construction. So is near. We just have a prayer of hearing a whisper next door.</p>
+
+  <p>That is the pivot: look close, and widen what counts as a sign. It is the least glamorous program in astronomy. No posters come out of it. It is small-signal photometry on unremarkable stars, decade-long integrations, error bars, and the constant possibility of nothing. The deep field will always be prettier. The deep field also cannot answer this question.</p>
+
+  <h2>Safe to find</h2>
+
+  <p>And there is a last piece, which I would put first if I thought anyone would sit still for it.</p>
+
+  <p>Far-field search is safe precisely because it is inconsequential. Find something at four thousand light-years and you write a paper; nobody goes anywhere. Near-field is different in kind. Anything close enough to detect by its exhaust is close enough to matter &mdash; close enough to reach, if not by us then by whatever we become. The search stops being an intellectual exercise the moment it succeeds.</p>
+
+  <p>So it is worth noticing who the dangerous party is in that scenario. If the durable civilizations are the quiet, sufficient, closed-loop ones, then the beings most likely to be out there are the ones with the least to gain from being found, and the most to lose from being found by something still in its growth phase, still expansionary, still hungry, still convinced that reaching is the same as arriving.</p>
+
+  <p>That would be us. Right now. The old space-opera reflex has it exactly backwards: the fleet on the horizon was never the threat. The threat is what a young civilization does when it finally gets somewhere.</p>
+
+  <p class="beat">Look closer. Open up what you&rsquo;re looking for. And be the kind of thing that is safe to find.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aaron Smith &middot; <a href="index.html">lmmtech.ai</a></p>
+</footer>
+
+</body>
+</html>
