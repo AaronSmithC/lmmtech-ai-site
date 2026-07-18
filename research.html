@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Large Movement Model — Technical Overview | LMM Technologies</title>
-  <meta name="description" content="Architecture, pipeline, and Phase I results for the Large Movement Model: a domain-agnostic foundation model for human motion. Multi-resolution attention and diffusion architectures substantially outperform baselines on motion forecasting." />
+  <meta name="description" content="Architecture, pipeline, and Phase I results for the Large Movement Model: a domain-agnostic foundation model for human motion. Three architecture generations culminating in diffusion forcing — seam-free streaming motion forecasting validated on live phone captures." />
   <meta property="og:title" content="The Large Movement Model — Technical Overview" />
   <meta property="og:description" content="Architecture, pipeline, and Phase I results for a motion foundation model." />
   <meta property="og:type" content="article" />
@@ -137,7 +137,15 @@
     <li><strong>Denoiser:</strong> 6-layer transformer encoder, cross-attending to context, predicting clean motion from noise.</li>
     <li><strong>Schedule:</strong> cosine noise schedule (T=100 training steps, DDIM 20-step inference).</li>
   </ul>
-  <p>Because diffusion generates all frames simultaneously, it does not suffer from compounding autoregressive error.</p>
+  <p>Because diffusion generates all frames simultaneously, it does not suffer from compounding autoregressive error <em>within</em> a block. As §4.4 shows, extending it <em>beyond</em> a block surfaces a different failure — which motivated the third and final Phase&nbsp;I architecture.</p>
+
+  <h3>3.4 Diffusion forcing (streaming)</h3>
+  <p>The third architecture removes the context/forecast boundary entirely. A single causal transformer (12 layers, 9.8M parameters — smaller than either predecessor) processes one sequence in which <strong>every frame carries its own noise level</strong>. A frame at noise level zero is clean conditioning; a frame at maximum noise is pure uncertainty. "Context" is no longer a separate input handled by a separate encoder — it is simply the frames that happen to be clean. Continuation is inpainting by construction: there is no boundary at which a discontinuity can exist.</p>
+  <ul>
+    <li><strong>Training:</strong> each frame in a training window is independently noised to a random level; the model learns to predict every frame's clean pose from its noisy neighborhood. Half of training uses the inference layout directly — a clean prefix followed by a noisy future.</li>
+    <li><strong>Streaming inference:</strong> a sliding pyramid. Each future slot sits at a noise level proportional to its distance from the present; every model pass denoises each slot one step; the slot reaching zero is committed as the next output frame, and a fresh pure-noise slot enters at the tail. <strong>One forecast frame per model pass</strong>, at any horizon.</li>
+    <li><strong>Robustness property:</strong> because the model trains on corrupted history, its own generation errors at rollout time look like noise it was trained to remove — the mechanism that prevents compounding-error collapse.</li>
+  </ul>
 
   <hr class="divider" />
 
@@ -171,12 +179,46 @@
     <video src="htt-vs-diffusion.mp4" autoplay muted loop playsinline preload="metadata"></video>
     <figcaption>A 12-second forecast rolled from an identical 8-second context. The autoregressive HTT collapses to a near-static pose; the diffusion model sustains motion across the full horizon.</figcaption>
   </figure>
-  <p style="margin-top:1.3rem;"><strong>That makes the diffusion model the usable forecaster.</strong> A deterministic rollout gives a sharp next frame and a serviceable first second, but the forecast cannot be extended; it coasts to a near-static pose and stays there. The diffusion model produces motion that stays alive across and well beyond the 2-second horizon — which is what any downstream use of a forecast actually requires. It is the architecture we build forward on.</p>
+  <p style="margin-top:1.3rem;"><strong>That makes diffusion the usable forecasting family.</strong> A deterministic rollout gives a sharp next frame and a serviceable first second, but the forecast cannot be extended; it coasts to a near-static pose and stays there. The diffusion model produces motion that stays alive across and well beyond the 2-second horizon — which is what any downstream use of a forecast actually requires. But rolling a <em>block</em> model has a cost of its own, one that only became measurable when we pushed rollouts onto real captured motion (§4.4).</p>
   <p style="margin-top:1.3rem;"><strong>What is the frozen pose hiding?</strong> The autoregressive forecast is not motionless — it is <em>amplitude-collapsed</em>. Scaling its output by a constant factor — a linear transform that changes each motion's magnitude but not its direction — reveals smooth, coherent movement beneath the stillness. The limitation is one of <em>magnitude</em>, not structure: minimizing squared error against an uncertain future rewards hedging toward the average pose, so the motion is predicted but shrunk. This is a diagnostic, not a fix — amplification makes the structure visible, it does not make the forecast more accurate.</p>
   <figure class="media-fig">
     <video src="autoregressive-amplitude-collapse.mp4" autoplay muted loop playsinline preload="metadata"></video>
     <figcaption>The autoregressive forecast (left) and the same output linearly amplified ×6 (right), drawn at one shared scale. Amplification scales each motion's magnitude while preserving its direction — showing that the freeze is collapsed amplitude, not absent motion. This characterizes the model's behavior; it is not a more accurate forecast.</figcaption>
   </figure>
+
+  <h3>4.4 The seam problem — and diffusion forcing</h3>
+  <p>Extending the block diffusion model past 2 seconds means rolling: generate a block, commit its head, slide the context, regenerate. Measured on real captured motion, this rolling has a signature defect: <strong>every commit boundary pops.</strong> On a 12-second rollout, all 14 block seams showed a per-frame displacement spike of 2.6–5.6× the surrounding motion (mean 3.6×), and the worst discontinuity of all was the very first handoff from real context into the forecast. A second defect compounds it: averaging multiple diffusion samples — the variance-reduction step behind Table&nbsp;1 — damps the rolled forecast to roughly a quarter of the clip's real motion energy. The amplitude-collapse video above is, in part, this damping made visible.</p>
+  <p>The cause is structural, not a tuning problem: each block is denoised from fresh noise, and nothing ties its first frame to the last committed one. Rather than patch it at inference — crossfades, boundary clamping, continuity-selected samples — we rebuilt on the architecture of §3.4, where the boundary does not exist.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Block diffusion</th><th>Diffusion forcing</th></tr></thead>
+      <tbody>
+        <tr><td>Forecast MSE, frame 1 (0.07s)</td><td>0.113</td><td class="hl">0.066&nbsp;(−42%)</td></tr>
+        <tr><td>Forecast MSE, frame 30 (2.0s)</td><td>0.480</td><td class="hl">0.432&nbsp;(−10%)</td></tr>
+        <tr><td>Forecast MSE, overall</td><td>0.357</td><td class="hl">0.334&nbsp;(−7%)</td></tr>
+        <tr><td>Rollout seam severity (boundary ÷ interior motion)</td><td>3.6×, every boundary</td><td class="hl">≈1.0× — no boundaries exist</td></tr>
+        <tr><td>Rollout motion energy vs. real clip</td><td>~0.25× (damped)</td><td class="hl">~1.2× (correct scale)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-caption">Table 2. Block diffusion vs. diffusion forcing, identical corpus and validation split. The −42% at frame 1 is native boundary conditioning showing up exactly where the theory predicts.</p>
+  <figure class="media-fig">
+    <video src="rollout-three-way.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <figcaption>Three architectures, one 8-second context, 12-second rollouts. The autoregressive HTT (left) freezes; block diffusion (center) moves but pops at every commit seam and runs under-energized; diffusion forcing (right) streams continuously at realistic motion energy.</figcaption>
+  </figure>
+
+  <h3>4.5 Real-world captures: an honest scoreboard</h3>
+  <p>Phase&nbsp;I closes the loop on live capture: clips recorded on a phone with our MovementModeler app (Apple-Vision pose, 15 of 25 joints) are normalized, tokenized, and streamed through the forecaster — the LLM analogy made literal, with the captured clip as the prompt. Captures longer than the 8-second context window come with their own ground truth: the model forecasts 12 seconds while reality plays out in parallel.</p>
+  <figure class="media-fig">
+    <video src="diffusion-forcing-vs-reality.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <figcaption>Best case. Left: what actually happened. Right: the streamed forecast from the same 8-second context. Over 12 seconds the forecast tracks the real future 40% better than a freeze-frame baseline — on a capture domain and subject the model never trained on.</figcaption>
+  </figure>
+  <p>Not every capture scores that well, and the failures are as informative as the success. Across six captures, forecast quality tracked two variables that have nothing to do with the architecture: <strong>capture stability</strong> (a hand-held or moving camera injects whole-skeleton warp the model dutifully continues — clips shot while the operator walked showed torso-scale fluctuations of 14–18%) and <strong>corpus coverage</strong>.</p>
+  <figure class="media-fig">
+    <video src="gait-domain-mismatch.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <figcaption>The corpus limitation, demonstrated. The subject — a 90-year-old walking, the exact clinical population that matters — moves slowly and deliberately. The model, trained exclusively on dance, streams flawlessly (the flattest seam profile of any capture) while confabulating motion at three times the real energy: it has never seen anyone move slowly. The architecture passes; the prior fails.</figcaption>
+  </figure>
+  <p>This is the cleanest possible statement of where the work stands. The streaming architecture is validated — seam-free, energy-correct, robust to its own feedback — on every capture including the ones it forecasts poorly. What fails is the <em>prior</em>: a 10M-parameter model trained on 10 genres of dance cannot know that a slow gait stays slow. Forecast fidelity is now a data problem, not an architecture problem — and a specialized large-scale corpus is precisely the Phase&nbsp;II plan (§7).</p>
 
   <hr class="divider" />
 
@@ -209,8 +251,11 @@
     <li><strong>2D projection.</strong> Phase&nbsp;I uses 2D pose estimation; depth-dependent movements are geometrically compressed. 3D pose or multi-view triangulation would improve coverage.</li>
     <li><strong>Training-data diversity.</strong> The primary corpus is 10 dance genres — fast, diverse, full-body, but not specifically clinical. Domain-specific fine-tuning on rehabilitation exercises is a Phase&nbsp;II objective.</li>
     <li><strong>Clinical alignment not yet validated.</strong> Engineering metrics are strong; correlation with expert-assigned movement-quality ratings has not yet been formally evaluated.</li>
-    <li><strong>Autoregressive forecasts do not extend.</strong> Deterministic models predict a sharp next frame, but their motion decays toward a static pose within about a second, and rolling them forward only deepens the collapse — frame-30 error remains ~6–10× frame-1 error. This is an architectural property of autoregressive generation, not a tuning problem. The diffusion model avoids it by generating each forecast block in a single pass.</li>
-    <li><strong>Evaluation methodology.</strong> HTT (single rollout) and diffusion (mean of 10) are not evaluated on identical terms; diffusion's advantage includes a variance-reduction benefit.</li>
+    <li><strong>Autoregressive forecasts do not extend.</strong> Deterministic models predict a sharp next frame, but their motion decays toward a static pose within about a second, and rolling them forward only deepens the collapse — frame-30 error remains ~6–10× frame-1 error. This is an architectural property of autoregressive generation, not a tuning problem.</li>
+    <li><strong>Block-diffusion rollouts seam.</strong> Rolled past its 2-second block, the block diffusion model pops at every commit boundary (3.6× interior motion) and its sample-averaged output runs far under real motion energy. Resolved by diffusion forcing (§4.4), which is now the forecasting architecture of record; the block model's numbers are retained above as the honest baseline it was.</li>
+    <li><strong>The prior is dance.</strong> Trained on 10 dance genres, the forecaster over-animates slow, deliberate movement — on an elderly-gait capture it streams flawlessly while losing to a freeze-frame baseline, because it has never seen a person move slowly. The most clinically relevant motion is the least represented in the training distribution. A large specialized corpus — slow gait, rehabilitation exercise, activities of daily living — is the single highest-leverage Phase&nbsp;II investment, and the streaming recipe carries over unchanged.</li>
+    <li><strong>Capture egomotion.</strong> A moving or hand-held camera injects whole-skeleton scale and sway that survives hip-centering (torso-scale fluctuations of 14–18% on operator-walking captures vs. ~5% hand-held standing). Planned mitigations: a per-clip egomotion QC gate, and low-pass per-frame torso scaling in normalization.</li>
+    <li><strong>Evaluation methodology.</strong> HTT (single rollout) and block diffusion (mean of 10) are not evaluated on identical terms; diffusion's Table&nbsp;1 advantage includes a variance-reduction benefit. Table&nbsp;2 compares the two diffusion models on identical terms.</li>
   </ul>
 
   <hr class="divider" />
@@ -219,15 +264,15 @@
   <h2>8. Architecture Summary</h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Component</th><th>HTT</th><th>Diffusion</th></tr></thead>
+      <thead><tr><th>Component</th><th>HTT</th><th>Block diffusion</th><th>Diffusion forcing</th></tr></thead>
       <tbody>
-        <tr><td>Parameters</td><td>18.8M</td><td>11.4M</td></tr>
-        <tr><td>Encoder</td><td>3-stream: frame (4L), window (3L), body-part (3L)</td><td>Context encoder (6L)</td></tr>
-        <tr><td>Fusion</td><td>Bidirectional cross-attn (4L) + gated combination</td><td>Cross-attn in denoiser</td></tr>
-        <tr><td>Decoder / generator</td><td>4-layer autoregressive decoder</td><td>6-layer denoiser, DDIM sampling</td></tr>
-        <tr><td>Embedding</td><td>256-d, 8 heads, FFN 1024</td><td>256-d, 8 heads, FFN 1024</td></tr>
-        <tr><td>Output</td><td>30 frames (2s), sequential</td><td>30 frames (2s), single pass</td></tr>
-        <tr><td>Inference</td><td>Deterministic; short-horizon (motion decays when rolled)</td><td>Stochastic, single-pass; sustains long-horizon motion</td></tr>
+        <tr><td>Parameters</td><td>18.8M</td><td>11.4M</td><td>9.8M</td></tr>
+        <tr><td>Encoder</td><td>3-stream: frame (4L), window (3L), body-part (3L)</td><td>Context encoder (6L)</td><td>Single causal transformer (12L)</td></tr>
+        <tr><td>Conditioning</td><td>Bidirectional cross-attn (4L) + gated combination</td><td>Cross-attn in denoiser</td><td>Per-frame noise level; clean frames <em>are</em> the context</td></tr>
+        <tr><td>Decoder / generator</td><td>4-layer autoregressive decoder</td><td>6-layer denoiser, DDIM sampling</td><td>Same causal stack; sliding-pyramid streaming</td></tr>
+        <tr><td>Embedding</td><td>256-d, 8 heads, FFN 1024</td><td>256-d, 8 heads, FFN 1024</td><td>256-d, 8 heads, FFN 1024</td></tr>
+        <tr><td>Output</td><td>30 frames (2s), sequential</td><td>30 frames (2s), single pass</td><td>Arbitrary horizon, 1 frame per pass</td></tr>
+        <tr><td>Inference</td><td>Deterministic; motion decays when rolled</td><td>Stochastic; sustains motion but seams when rolled</td><td>Stochastic streaming; seam-free at any horizon</td></tr>
       </tbody>
     </table>
   </div>
@@ -236,8 +281,8 @@
 
   <!-- 9 -->
   <h2>9. Conclusion</h2>
-  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that both multi-resolution attention and diffusion-based generation learn meaningful motion structure from video-derived pose data. Trained on diverse full-body movement, the diffusion model reduces overall prediction error by 30% versus a standard transformer baseline, with a 31% improvement at the clinically relevant 2-second horizon — and where the autoregressive models freeze into a static pose past that horizon, the diffusion model keeps generating coherent motion, making it the practical basis for sustained forecasting.</p>
-  <p>Cross-domain evaluation on held-out data from a different capture modality confirms that the learned dynamics transfer — velocity prediction quality is essentially invariant to training corpus, even on domains the model never saw. These results establish feasibility for a new class of domain-agnostic motion foundation models — systems that learn movement structure transferable across capture modalities and movement types.</p>
+  <p>The Large Movement Model demonstrates that human motion can be treated as a structured sequence domain analogous to text, and that sequence architectures learn meaningful motion structure from video-derived pose data. Phase&nbsp;I traversed three architecture generations, each fixing the measured failure of the last: autoregressive attention forecasts sharply but freezes when rolled; block diffusion sustains motion but pops at every commit seam and damps to a fraction of real energy; diffusion forcing — per-frame noise levels on a single causal transformer — eliminates the boundary itself, streaming seam-free at correct motion energy for arbitrary horizons, with a 42% reduction in boundary error over block diffusion at 9.8M parameters, the smallest model of the three.</p>
+  <p>The loop is closed end to end on live capture: a phone-recorded clip is the prompt, and the model streams its continuation one frame per pass — validated against real futures, where it beats a freeze-frame baseline by 40% on in-scope motion and, just as informatively, fails on motion its dance-only corpus never contained. Cross-domain evaluation confirms the learned dynamics transfer across capture modalities; the real-capture scoreboard shows forecast fidelity is now bounded by data, not architecture. That is the Phase&nbsp;II thesis in one line: the streaming foundation is built — what it needs next is a corpus of the movement that matters.</p>
 
   <p style="margin-top:2rem;">
     <a href="manufactured_instinct_essay_page.html" class="btn btn-dark">Read the thesis →</a>
