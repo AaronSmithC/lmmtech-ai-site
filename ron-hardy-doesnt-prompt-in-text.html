@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ron Hardy Doesn’t Prompt in Text — LMM Technologies</title>
+<meta name="description" content="The mix is the prompt. An essay on native data, symbolic control planes, and why the most interesting models won’t be steered in words.">
+<meta property="og:title" content="Ron Hardy Doesn’t Prompt in Text">
+<meta property="og:description" content="The mix is the prompt. Native data in, native data out, no words anywhere in the loop.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://lmmtech.ai/mix-as-score.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lmmtech.ai/mix-as-score.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E3A34;
+    --green:#357668;
+    --green-light:#509788;
+    --gold:#a9832a;
+    --gold-soft:#c9a63f;
+    --cream:#F8F6F2;
+    --paper:#FBFAF7;
+    --muted:#5c6f68;
+    --rule:#e3ddd1;
+    --maxw:680px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Spectral",Georgia,serif;
+    font-size:19px;
+    line-height:1.72;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--green);}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 26px;
+    position:relative;
+  }
+
+  /* signature: gold->green rail down the left of the article */
+  .article{
+    position:relative;
+    padding:64px 0 40px 26px;
+  }
+  .article::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:linear-gradient(to bottom,
+      var(--gold) 0%,
+      var(--gold-soft) 12%,
+      var(--green-light) 46%,
+      var(--green) 100%);
+    border-radius:2px;
+  }
+  @media (max-width:760px){
+    .article{padding-left:20px;}
+  }
+
+  .eyebrow{
+    font-family:"Fraunces",Georgia,serif;
+    font-size:13px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin:0 0 20px;
+  }
+  h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:500;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+  .byline{
+    font-size:15px;
+    color:var(--muted);
+    margin:26px 0 0;
+    padding-bottom:30px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  .body{
+    padding-top:34px;
+  }
+  .body p{
+    margin:0 0 1.35em;
+    hanging-punctuation:first;
+  }
+  .body em{font-style:italic;}
+  .lead{
+    font-size:20px;
+  }
+  .dropcap{
+    float:left;
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;
+    font-size:76px;
+    line-height:0.82;
+    padding:6px 10px 0 0;
+    color:var(--gold);
+  }
+
+  /* plates */
+  figure{
+    margin:0;
+  }
+  figure img{
+    width:100%;
+    height:auto;
+    display:block;
+    border:1px solid var(--rule);
+  }
+  figcaption{
+    margin-top:9px;
+    font-size:13.5px;
+    color:var(--muted);
+    line-height:1.5;
+  }
+
+  .plate-float{
+    float:right;
+    width:46%;
+    margin:6px 0 14px 26px;
+  }
+  .plate-main{
+    width:100%;
+    margin:2.8rem 0;
+  }
+  .plate-modest{
+    width:86%;
+    margin:2.4rem auto;
+  }
+
+  /* the closing line */
+  .coda{
+    margin-top:5rem;
+  }
+  .coda .setup{
+    margin-bottom:0;
+  }
+  .closing{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:500;
+    font-size:clamp(21px,3.4vw,26px);
+    line-height:1.35;
+    color:var(--gold);
+    margin:3.2rem 0 0;
+  }
+
+  footer{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:90px 26px 90px;
+    color:var(--muted);
+    font-size:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  footer .brand{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:0.02em;
+  }
+  footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule);}
+  footer a:hover,footer a:focus-visible{color:var(--green);border-color:var(--green);}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  @media (max-width:600px){
+    body{font-size:18px;}
+    .article{padding-top:44px;}
+    .dropcap{font-size:62px;}
+    .plate-float{
+      float:none;
+      width:100%;
+      margin:1.6rem 0;
+    }
+    .plate-main{
+      margin:2rem 0;
+    }
+    .plate-modest{
+      width:100%;
+      margin:2rem 0;
+    }
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .article,.body{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
+    .body{animation-delay:.08s;}
+    @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <article class="article">
+      <header>
+        <p class="eyebrow">Essay · LMM Technologies</p>
+        <h1>Ron Hardy Doesn’t Prompt in Text</h1>
+        <p class="byline">Aaron Smith&nbsp;&nbsp;·&nbsp;&nbsp;July 2026&nbsp;&nbsp;·&nbsp;&nbsp;~6 min read</p>
+      </header>
+      <div class="body">
+
+        <section>
+          <figure class="plate-float">
+            <img src="reel-to-reel.png" alt="An archival technical plate of a TEAC A-3340S quarter-inch reel-to-reel tape recorder, with a tape-path detail showing a splice and the editor’s tools: a single-edge razor blade and a white grease pencil.">
+          </figure>
+          <p class="lead"><span class="dropcap">T</span>he Chosen Few Picnic was last week — a celebration of house music, the thing Chicago gave the world — and it got me thinking about Ron Hardy. Hardy was the resident DJ at the Music Box — the underground, if you were there — while Frankie Knuckles played smooth and soulful across town at the Power Plant. Ronnie was the other pole: raw, loud, relentless, a signature sound you knew in eight bars. He is dead now, and the room he played cannot be reconstructed. What survives are records he played, which anyone can buy, and audience tapes, which sound like they were recorded inside a kick drum. The records were never the work. Hardy pitched them up until Stevie Wonder ran at +8, rode the EQ until a bassline stood alone in the room, played tracks twice, played them backward, cut his own edits on reel-to-reel so that the version filling the room — his “I Can’t Turn Around,” his “Love Is the Message” — existed nowhere else on earth. The records were raw material. The work was what he did to them.</p>
+        </section>
+
+        <section>
+          <p>So here is an idea I couldn’t shake. Train a model on every record Hardy played. Then prompt it — not with a sentence, not with “play it dark and relentless,” but with a Hardy mix itself. The mix is the prompt. And the model returns a mix: his selections, his pitch, his edits, his sequence — that Ronnie Hardy sound. Native data in, native data out, no words anywhere in the loop.</p>
+          <p>Am I asking too much?</p>
+        </section>
+
+        <figure class="plate-main">
+          <img src="mix-as-score.png" alt="An archival diagram titled “DJ Mix as Annotated Score”: three deck timelines carrying labeled record segments, pitch curves marked in semitones, handwritten splice and rewind annotations, an effects row, a master waveform, and a splice map of timestamped cut points.">
+          <figcaption>the decision layer, written down — which record, entered where, at what pitch, cut when</figcaption>
+        </figure>
+
+        <section>
+          <p>Yes — and the way it fails is more useful than the idea itself.</p>
+          <p>An audio-to-audio model trained on those records and prompted with a tape would give you house-flavored texture hallucinating records that don’t exist. Because the audio was never the work. The work was a decision sequence over a catalog: which record, entered where, at what pitch, blended how, cut when, rewound why. A mix is the <em>render</em> of that sequence. Train on renders and you learn the surface. The generative object — the thing Hardy was actually authoring, four hundred decisions a night — is a symbolic layer. And here is the part worth slowing down for: that symbolic layer is not language. It’s not audio and it’s not English. It’s a third kind of thing.</p>
+          <p>Most of what I want to say follows from taking that seriously. But first, a detour through arithmetic.</p>
+        </section>
+
+        <section>
+          <figure class="plate-modest">
+            <img src="notation-waveform.png" alt="An archival plate in which handwritten equations of signals and systems on the left dissolve into the things they describe on the right: an audio waveform, layered data traces with a marked splice and rewind, and a stick-figure running sequence over a motion trajectory.">
+          </figure>
+          <p>When a large language model answers a math problem, it is not calculating. There is no adder in there, no carry bit, nothing a calculator would recognize. The model is doing the only thing it ever does — statistical continuation over symbols — and it happens that predicting math text badly is expensive, so training pressure forced it to grow internal circuits that approximate arithmetic: rough-magnitude heuristics running in parallel with last-digit bookkeeping, converging on the right token most of the time. It knows the notation of mathematics, and prediction has forced it to partially reconstruct the thing the notation refers to. Partially. The reconstruction is an accident of the objective, and it is exactly as good as the text demanded and no better.</p>
+          <p>Hold that thought, because it generalizes to everything.</p>
+        </section>
+
+        <section>
+          <p>The dominant pattern in machine learning right now is what you could call text-hub multimodality. Images, audio, video, sensor streams — all of it projected into a language model’s latent space, with text as the interlingua and the caption as the steering wheel. You describe what you want and the model renders it. This buys something real: compositional instruction, the ability to ask for a cat in a spacesuit in watercolor. But it charges a tax, and the tax is everything language describes poorly. Micro-timing. Energy contour. The signature of a gait. The texture of order flow in the last forty seconds before a number prints. “Play it like Ron Hardy” is a caption. The mix is the specification. Everything between the caption and the specification is lost at the interface, and no amount of scale recovers it, because it was never in the words.</p>
+        </section>
+
+        <section>
+          <p>There is another pattern, older and quieter: the modality closed on itself. Motion in, motion out. Market state in, next market state out. Weather in, weather out. The prompt is a sample from the same distribution as the answer, and the task is implicit — continue, forecast, transform. Nothing is described. The prompt <em>demonstrates</em>. Few-shot prompting turns out not to be a property of language at all; it is a property of sequence models, and the tokens don’t have to be words.</p>
+          <p>I build these. One model trained on human motion — joint positions streaming off video — prompted with motion, forecasting motion. Another trained on market data, running live against the stream it was trained on. In neither loop does a caption appear. And the difference from the text-hub world is not cosmetic. A model trained on descriptions of motion knows the language of motion, the way the LLM knows the notation of arithmetic — a partial reconstruction, exactly as faithful as the text demanded. A model trained on motion has no notation to hide behind. Prediction fails unless the representation carries the dynamics. Text models know <em>about</em> domains. Native models know domains, because nothing less survives the objective.</p>
+        </section>
+
+        <section>
+          <p>Which brings back Hardy, and why the failure of the naive version matters.</p>
+          <p>The Hardy problem isn’t solved by going native, because the native stream — the audio — sits <em>below</em> the work. And it isn’t solved by going linguistic, because no caption carries a night at the Music Box. It’s solved, if it’s solvable, by a spine and a handle: a model over the decision layer — the selections, the in-points, the pitch moves, the edits, transcribed off every surviving tape — rendering through the real records. Native audio at the bottom, a symbolic control plane on top, and the control plane is not language. It’s closer to a score. Or a strategy.</p>
+          <p>I think that’s the shape of the most interesting systems coming: native spines, so the representation is forced to be faithful, with symbolic handles that fit the domain instead of flattening it into vocabulary. Steering a model the way Hardy steered the room — not by describing what you want, but with the thing itself.</p>
+        </section>
+
+        <section class="coda">
+          <p class="setup">That is the whole company, stated once:</p>
+          <p class="closing">We build models that know the domain, not the words about the domain.</p>
+        </section>
+
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <span class="brand">LMM Technologies</span>
+    <span><a href="index.html">lmmtech.ai</a></span>
+  </footer>
+
+</body>
+</html>
