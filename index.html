@@ -1,315 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LMM Technologies — Foundation AI for Human Motion</title>
-  <meta name="description" content="LMM Technologies builds foundation models that treat human movement as a first-class sequence domain — the perceptual and predictive backbone for rehabilitation, sports, robotics, and embodied AI." />
-  <meta property="og:title" content="LMM Technologies — Foundation AI for Human Motion" />
-  <meta property="og:description" content="As AI moves from text into the physical world, LMM builds foundation models for a fundamental physical signal: how bodies move." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <meta property="og:image" content="https://lmmtech.ai/og-card.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://lmmtech.ai/og-card.png" />
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LMM Technologies</title>
+<meta name="description" content="LMM Technologies builds sequence models for human movement. Models that know the domain, not the words about the domain.">
+<meta property="og:title" content="LMM Technologies">
+<meta property="og:description" content="Sequence models for human movement. Models that know the domain, not the words about the domain.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://lmmtech.ai/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lmmtech.ai/og-card.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-<!-- ── Navigation ─────────────────────────────────────────── -->
-<nav class="site-nav">
-  <div class="site-nav-inner">
-    <a href="/" class="brand">LMM&nbsp;<span class="brand-mark">·</span>&nbsp;Technologies</a>
-    <div class="nav-links">
-      <a href="#thesis">Thesis</a>
-      <a href="research.html">Research</a>
-      <a href="#domains" class="label-full">Domains</a>
-      <a href="mailto:contact@lmmtech.ai" class="nav-cta">Contact</a>
-    </div>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/">LMM Technologies</a>
+    <nav>
+      <a href="work.html">Work</a>
+      <a href="#writing">Writing</a>
+      <a href="mailto:contact@lmmtech.ai">Contact</a>
+    </nav>
   </div>
-</nav>
 
-<!-- ── Hero ───────────────────────────────────────────────── -->
-<header class="hero">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <div class="eyebrow">Foundation AI for human motion</div>
-      <h1>Large Movement Models</h1>
-      <p class="lede">A foundation model that treats movement as a first-class sequence domain — learning the structure of how bodies move through the physical world.</p>
-      <div class="hero-cta">
-        <a href="research.html" class="btn btn-primary">Read the research</a>
-        <a href="#thesis" class="btn btn-ghost">The thesis</a>
-      </div>
-      <div class="hero-meta">Developed by LMM Technologies — an affiliate of Aegis Station Infrastructure</div>
+  <article class="article">
+    <p class="eyebrow">Sequence models for human movement</p>
+    <h1>Models that know the domain, not the words about the domain.</h1>
+
+    <div class="body">
+      <p>LMM Technologies is a small research company. We build sequence models for human movement: models trained on motion and prompted with motion. Joint positions come off ordinary video, and the model returns a continuation. No caption appears anywhere in the loop.</p>
+
+      <p>The bet is that movement carries structure the way text does, and that a model trained directly on it learns that structure because nothing less survives the objective. A model trained on descriptions of motion knows the language of motion. A model trained on motion has no notation to hide behind.</p>
+
+      <p>Today that means a forecaster that watches a few seconds of a person moving and streams what comes next. Alongside it we are working on a written form for movement, so that motion can be recorded, searched, and compared without keeping the video.</p>
+
+      <p>The first place this matters is remote musculoskeletal care, where a clinician needs to see how someone moves without the footage ever leaving the room. <a href="work.html">Where the work stands</a>.</p>
     </div>
 
-    <div class="hero-figure">
-      <!-- Animated pose-skeleton motif -->
-      <svg class="skeleton" viewBox="0 0 200 280" role="img" aria-label="Stylized human pose skeleton in motion">
-        <!-- bones -->
-        <g class="bone">
-          <line x1="100" y1="46" x2="100" y2="120" />            <!-- spine -->
-          <line x1="100" y1="64" x2="60"  y2="92"  class="limb-anim" /> <!-- L upper arm -->
-          <line x1="60"  y1="92" x2="46"  y2="138" />            <!-- L forearm -->
-          <line x1="100" y1="64" x2="140" y2="92"  class="limb-anim" /> <!-- R upper arm -->
-          <line x1="140" y1="92" x2="154" y2="138" />            <!-- R forearm -->
-          <line x1="100" y1="120" x2="74"  y2="186" />           <!-- L thigh -->
-          <line x1="74"  y1="186" x2="66"  y2="248" />           <!-- L shin -->
-          <line x1="100" y1="120" x2="126" y2="186" class="limb-anim" /> <!-- R thigh -->
-          <line x1="126" y1="186" x2="134" y2="248" />           <!-- R shin -->
-        </g>
-        <!-- joints -->
-        <circle class="joint-core" cx="100" cy="34" r="13" />     <!-- head -->
-        <circle class="joint pulse" cx="100" cy="64"  r="4.5" />
-        <circle class="joint" cx="60"  cy="92"  r="4" />
-        <circle class="joint pulse" cx="46"  cy="138" r="4" />
-        <circle class="joint" cx="140" cy="92"  r="4" />
-        <circle class="joint pulse" cx="154" cy="138" r="4" />
-        <circle class="joint-core" cx="100" cy="120" r="5" />     <!-- hip -->
-        <circle class="joint" cx="74"  cy="186" r="4" />
-        <circle class="joint pulse" cx="66"  cy="248" r="4" />
-        <circle class="joint" cx="126" cy="186" r="4" />
-        <circle class="joint pulse" cx="134" cy="248" r="4" />
-      </svg>
-    </div>
-  </div>
-</header>
+    <h2 id="writing">Writing</h2>
+    <ul class="list">
+      <li>
+        <span class="kind">Essay</span>
+        <a href="ron-hardy-doesnt-prompt-in-text.html">Ron Hardy Doesn&rsquo;t Prompt in Text</a>
+        <span class="desc">The mix is the prompt. On native data, symbolic control planes, and why the most interesting models won&rsquo;t be steered in words.</span>
+      </li>
+      <li>
+        <span class="kind">Note</span>
+        <a href="manufactured_instinct_essay_page.html">Machine learning, or manufactured instinct?</a>
+        <span class="desc">Why <em>learning</em> may be the wrong word, and what it means to build instinct first, deliberation second.</span>
+      </li>
+      <li>
+        <span class="kind">Note</span>
+        <a href="the_second_half_essay_page.html">The second half of the architecture</a>
+        <span class="desc">If today&rsquo;s models are manufactured instinct, the part still missing is learning, and the measure of it is how little data it takes.</span>
+      </li>
+      <li>
+        <span class="kind">Aside</span>
+        <a href="look-closer.html">Look Closer</a>
+        <span class="desc">For sixty years we&rsquo;ve searched for a technology and called it a search for life.</span>
+      </li>
+      <li>
+        <span class="kind">Aside</span>
+        <a href="too-fleeting-and-too-far.html">Too Fleeting and Too Far</a>
+        <span class="desc">Organic molecules are everywhere, and that&rsquo;s the bad news.</span>
+      </li>
+      <li>
+        <span class="kind">Aside</span>
+        <a href="snapshots.html">Snapshots of a Universe That No Longer Exists</a>
+        <span class="desc">On quasars, obituaries, and why &ldquo;now&rdquo; doesn&rsquo;t reach that far.</span>
+      </li>
+      <li>
+        <span class="kind">Aside</span>
+        <a href="happened-once.html">What If Life Only Happened Once?</a>
+        <span class="desc">On why a universe full of ingredients can still be silent.</span>
+      </li>
+      <li>
+        <span class="kind">Aside</span>
+        <a href="preparing-for-the-data-apocalypse.html">Preparing for the Data Apocalypse</a>
+        <span class="desc">On building an offline knowledge archive for when &ldquo;just Google it&rdquo; stops working.</span>
+      </li>
+    </ul>
 
-<!-- ── Stat band ──────────────────────────────────────────── -->
-<section class="section" style="padding:3rem 0;">
-  <div class="stat-band">
-    <div class="stat">
-      <div class="stat-num"><span>30%</span></div>
-      <div class="stat-label">lower motion-forecasting error vs. a standard transformer baseline</div>
+    <div class="contact body">
+      <p><a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a></p>
     </div>
-    <div class="stat">
-      <div class="stat-num">17k<span>+</span></div>
-      <div class="stat-label">clips processed across five independent capture sources, zero pipeline failures</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5</div>
-      <div class="stat-label">capture modalities converge to one normalized representation</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">&lt;150<span>MB</span></div>
-      <div class="stat-label">model + pipeline footprint — runs on a single GPU, fully air-gapped</div>
-    </div>
-  </div>
-</section>
+  </article>
+</div>
 
-<!-- ── The moment (Prometheus framing) ────────────────────── -->
-<section class="section section-subtle" id="moment">
-  <div class="wrap">
-    <div class="feature">
-      <div>
-        <div class="eyebrow">The frontier is moving</div>
-        <p class="pull">Foundation models proved themselves on text. The next domain is the physical world.</p>
-      </div>
-      <div class="prose" style="margin:0;">
-        <p class="prose-lead">In late 2025, Jeff Bezos co-founded <strong>Project Prometheus</strong> — an AI company built to make models that understand <em>physical</em> reality rather than just language. One signal among several of a broad turn: the next era of AI is embodied.</p>
-        <p>Language was the first domain to fall to the foundation-model recipe because it was the easiest to digitize. It will not be the last. Any domain that unfolds in time and carries hard structural constraints — biological signals, industrial telemetry, and <strong>movement</strong> — is a candidate for the same treatment.</p>
-        <p>LMM Technologies builds foundation models for a fundamental physical signal: <strong>how a body moves through space.</strong> Not a CAD assistant, not a robot — the motor prior underneath both.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Thesis ─────────────────────────────────────────────── -->
-<section class="section" id="thesis">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">The thesis</div>
-      <h2>Machine learning, or manufactured instinct?</h2>
-      <p>We are not building artificial minds. We are manufacturing artificial instinct — compressing the structure of a domain into priors the way evolution did for living things, only on a vastly shorter timescale.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <div class="card-kicker">Priors, not reasoning</div>
-        <h3>Instinct is compressed structure</h3>
-        <p>A foal stands within hours; a trader reads a tape at a glance. Expertise lives in priors built from exposure, not deliberation. Large models manufacture exactly this kind of prior.</p>
-      </div>
-      <div class="card">
-        <div class="card-kicker">The recipe generalizes</div>
-        <h3>Movement is a sequence domain</h3>
-        <p>The same recipe — large-scale training, learned tokenization, attention over long sequences — applies wherever an expert sees what a novice cannot. Motion is a prime case, and a largely untouched one.</p>
-      </div>
-      <div class="card">
-        <div class="card-kicker">Instinct first</div>
-        <h3>The first half of an architecture</h3>
-        <p>Today's models are the bottom layer: manufactured instinct. The half still missing is learning — adapting from little because it stands on a great deal.</p>
-      </div>
-    </div>
-    <p style="margin-top:1.6rem;">
-      <a href="manufactured_instinct_essay_page.html" class="btn btn-dark">Read the essay →</a>
-    </p>
-  </div>
-</section>
-
-<!-- ── What is an LMM / pipeline ──────────────────────────── -->
-<section class="section section-subtle" id="how">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">How it works</div>
-      <h2>From raw video to motion intelligence</h2>
-      <p>A Large Movement Model treats motion itself as the primary data type — sequences of joint positions, trajectories, and timing — and learns how movement unfolds the way a language model learns how text unfolds.</p>
-    </div>
-    <div class="pipeline">
-      <div class="pipe-step"><div class="pipe-n">01</div><h4>Capture</h4><p>Video or sensor streams from any camera, frame rate, or skeleton format.</p></div>
-      <div class="pipe-step"><div class="pipe-n">02</div><h4>Pose</h4><p>OpenPose BODY_25 keypoints — 25 joints with per-joint confidence.</p></div>
-      <div class="pipe-step"><div class="pipe-n">03</div><h4>Normalize</h4><p>Hip-centered, torso-scaled, resampled to 15&nbsp;FPS with QC scoring.</p></div>
-      <div class="pipe-step"><div class="pipe-n">04</div><h4>Tokenize</h4><p>Frame, window, and body-part views — motion as multi-resolution tokens.</p></div>
-      <div class="pipe-step"><div class="pipe-n">05</div><h4>Model</h4><p>Hierarchical transformer or diffusion inference over the sequence.</p></div>
-    </div>
-    <div class="callout" style="margin-top:2rem;">
-      <strong>Multi-resolution by design.</strong> Movement happens at many timescales at once — frame-level dynamics, half-second phrases, whole-body coordination. LMM attends to all three simultaneously, which is what lets it stay coherent seconds into the future where flat models drift.
-    </div>
-    <p style="margin-top:1.5rem;"><a href="research.html">See the full technical overview — architecture, results, and cross-domain transfer →</a></p>
-  </div>
-</section>
-
-<!-- ── Domains ────────────────────────────────────────────── -->
-<section class="section" id="domains">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Where it applies</div>
-      <h2>One motor prior, many domains</h2>
-      <p>The pipeline makes no assumption about <em>what kind</em> of movement it sees. In early experiments, motion dynamics learned on dance video transferred — essentially intact — to clinical motion capture the model had never seen.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card"><h3>Rehabilitation</h3><p>Movement-quality analytics, recovery tracking, and compensatory-pattern detection across gait and balance.</p></div>
-      <div class="card"><h3>Sports &amp; performance</h3><p>Technique assessment, fatigue signals, injury-risk estimation, and biomechanical pattern analysis.</p></div>
-      <div class="card"><h3>Robotics &amp; embodiment</h3><p>A pretrained human-motion prior for imitation learning, retargeting, and anticipatory human–robot coordination.</p></div>
-      <div class="card"><h3>Ergonomics &amp; safety</h3><p>Workplace movement monitoring, physical-demand quantification, and real-time anomaly detection.</p></div>
-      <div class="card"><h3>Movement analytics</h3><p>Anomalous-movement detection and activity understanding from full-body dynamics.</p></div>
-      <div class="card"><h3>Human–computer interaction</h3><p>Motion-aware interfaces that read intent from how a person moves, not just what they touch.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Embodiment feature ─────────────────────────────────── -->
-<section class="section section-subtle" id="embodiment">
-  <div class="wrap">
-    <div class="feature">
-      <div>
-        <div class="eyebrow">Embodiment</div>
-        <h2 style="font-family:var(--font-serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.18;letter-spacing:-0.015em;margin:0.7rem 0 0;">A motor-cortex prior for any body</h2>
-      </div>
-      <div class="prose" style="margin:0;">
-        <p class="prose-lead">LMM internalizes that shoulders have range-of-motion limits, that gait is periodic, that balance demands continuous postural adjustment. This knowledge exists independently of any particular body.</p>
-        <p>Most humanoid and assistive robots are trained from scratch in simulation — expensive, with brittle sim-to-real transfer — or rely on hand-coded primitives. A model that already understands joint coordination, plausible trajectories, and multi-timescale dynamics gives a robot a head start: fine-tune from a rich prior instead of learning from zero.</p>
-        <p>The architecture lines up with the problem in a way that's hard to ignore: the HTT's three temporal levels correspond to a robot's actuator control, trajectory planning, and task sequencing, and the body-part stream is the kind of coordination signal that bimanual manipulation and whole-body balance demand. In principle, a 1–2&nbsp;second forecast horizon is the right window for a robot to <strong>anticipate</strong> a human collaborator rather than merely react. Whether the motion prior transfers this way is a direction we're pursuing — not a result we're claiming.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Read more ──────────────────────────────────────────── -->
-<section class="section" id="read">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Go deeper</div>
-      <h2>Read the work</h2>
-    </div>
-    <div class="grid grid-3">
-      <a href="research.html" class="card">
-        <div class="card-kicker">Technical overview</div>
-        <h3>The Large Movement Model</h3>
-        <p>Pipeline, architectures, and results to date — including a diffusion model that cuts forecasting error 30% and motion dynamics that transfer across capture modalities.</p>
-        <span class="card-arrow">Read the research →</span>
-      </a>
-      <a href="manufactured_instinct_essay_page.html" class="card">
-        <div class="card-kicker">Notes</div>
-        <h3>Machine learning, or manufactured instinct?</h3>
-        <p>Why the word <em>learning</em> may be the wrong word — and what it means to build instinct first, deliberation second.</p>
-        <span class="card-arrow">Read the note →</span>
-      </a>
-      <a href="the_second_half_essay_page.html" class="card">
-        <div class="card-kicker">Notes</div>
-        <h3>The second half of the architecture</h3>
-        <p>If today's models are manufactured instinct, the part still missing is learning — and the measure of it is how little data it takes.</p>
-        <span class="card-arrow">Read the note →</span>
-      </a>
-    </div>
-    <a href="ron-hardy-doesnt-prompt-in-text.html" class="card" style="display:block;margin-top:1.25rem;">
-      <div class="card-kicker">Essay</div>
-      <h3>Ron Hardy Doesn&rsquo;t Prompt in Text</h3>
-      <p>The mix is the prompt. On native data, symbolic control planes, and why the most interesting models won&rsquo;t be steered in words &mdash; the whole company, stated once.</p>
-      <span class="card-arrow">Read the essay →</span>
-    </a>
-    <a href="preparing-for-the-data-apocalypse.html" class="card" style="display:block;margin-top:1.25rem;border-style:dashed;">
-      <div class="card-kicker">Aside — off the movement beat</div>
-      <h3>Preparing for the Data Apocalypse</h3>
-      <p>A change of pace. When the grid goes down and "just Google it" stops working, the most valuable item in your kit might be a local AI model — on building an offline knowledge archive.</p>
-      <span class="card-arrow">Read the dispatch →</span>
-    </a>
-    <a href="happened-once.html" class="card" style="display:block;margin-top:1.25rem;border-style:dashed;">
-      <div class="card-kicker">Aside — off the movement beat</div>
-      <h3>What If Life Only Happened Once?</h3>
-      <p>Every organism on Earth runs on the same blueprint — one genesis, endlessly varied. On why a universe full of ingredients can still be silent, and what it means if we are not a sample but the whole inventory.</p>
-      <span class="card-arrow">Read the aside →</span>
-    </a>
-    <a href="snapshots.html" class="card" style="display:block;margin-top:1.25rem;border-style:dashed;">
-      <div class="card-kicker">Aside — off the movement beat</div>
-      <h3>Snapshots of a Universe That No Longer Exists</h3>
-      <p>Euclid photographed 31 of the oldest quasars ever documented — light thirteen billion years stale, from sources that are almost certainly gone. On quasars, obituaries, and why &ldquo;now&rdquo; doesn&rsquo;t reach that far.</p>
-      <span class="card-arrow">Read the aside →</span>
-    </a>
-    <a href="too-fleeting-and-too-far.html" class="card" style="display:block;margin-top:1.25rem;border-style:dashed;">
-      <div class="card-kicker">Aside — off the movement beat</div>
-      <h3>Too Fleeting and Too Far</h3>
-      <p>Organic molecules are everywhere — amino acids ride in on asteroids, and that&rsquo;s the bad news. On why abundant chemistry guarantees loneliness, and the one loophole that turns strangers into kin.</p>
-      <span class="card-arrow">Read the aside →</span>
-    </a>
-    <a href="look-closer.html" class="card" style="display:block;margin-top:1.25rem;border-style:dashed;">
-      <div class="card-kicker">Aside — off the movement beat</div>
-      <h3>Look Closer</h3>
-      <p>For sixty years we&rsquo;ve searched for a technology and called it a search for life. On why the civilizations most likely to last are the ones least likely to broadcast — and why the only answerable version of the question is next door.</p>
-      <span class="card-arrow">Read the aside →</span>
-    </a>
-  </div>
-</section>
-
-<!-- ── Contact ────────────────────────────────────────────── -->
-<section class="section section-subtle" id="contact">
-  <div class="wrap" style="text-align:center;max-width:640px;">
-    <div class="eyebrow">Get in touch</div>
-    <h2 style="font-family:var(--font-serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.3rem);margin:0.7rem 0 1rem;">Building the foundation model for movement</h2>
-    <p style="color:var(--color-text-secondary);margin-bottom:1.6rem;">For research, partnership, or pilot inquiries across rehabilitation, sports, robotics, and embodied systems.</p>
-    <a href="mailto:contact@lmmtech.ai" class="btn btn-dark">contact@lmmtech.ai</a>
-  </div>
-</section>
-
-<!-- ── Footer ─────────────────────────────────────────────── -->
-<footer class="site-footer">
-  <div class="wrap">
-    <div>
-      <div class="foot-brand">LMM Technologies</div>
-      <div class="foot-tag">Foundation AI for human motion, behavior, and embodied systems.</div>
-    </div>
-    <div class="foot-links">
-      <div class="foot-col">
-        <h5>Read</h5>
-        <a href="research.html">Technical overview</a>
-        <a href="manufactured_instinct_essay_page.html">Notes — manufactured instinct</a>
-        <a href="the_second_half_essay_page.html">Notes — the second half</a>
-        <a href="ron-hardy-doesnt-prompt-in-text.html">Essay — Ron Hardy doesn't prompt in text</a>
-        <a href="preparing-for-the-data-apocalypse.html">Aside — data apocalypse</a>
-        <a href="happened-once.html">Aside — life happened once</a>
-        <a href="snapshots.html">Aside — quasar snapshots</a>
-        <a href="too-fleeting-and-too-far.html">Aside — too fleeting, too far</a>
-        <a href="look-closer.html">Aside — look closer</a>
-      </div>
-      <div class="foot-col">
-        <h5>Connect</h5>
-        <a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a>
-        <a href="https://aegisstation.com">Aegis Station Infrastructure</a>
-      </div>
-    </div>
-    <div class="foot-legal">© 2026 LMM Tech, Inc. · An affiliate of Aegis Station Infrastructure LLC.</div>
-  </div>
+<footer>
+  <span class="brand">LMM Technologies</span>
+  <span>&copy; 2026 LMM Tech, Inc. &middot; An affiliate of <a href="https://aegisstation.com">Aegis Station Infrastructure</a></span>
 </footer>
 
 </body>

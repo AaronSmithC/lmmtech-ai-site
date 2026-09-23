@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the work stands — LMM Technologies</title>
+<meta name="description" content="A short account of what LMM Technologies has built, what it has learned, and what it is working on. September 2026.">
+<meta property="og:title" content="Where the work stands">
+<meta property="og:description" content="What we have built, what we have learned, and what we are working on. September 2026.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://lmmtech.ai/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lmmtech.ai/og-card.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/">LMM Technologies</a>
+    <nav>
+      <a href="/#writing">Writing</a>
+      <a href="mailto:contact@lmmtech.ai">Contact</a>
+    </nav>
+  </div>
+
+  <article class="article">
+    <p class="eyebrow">Work</p>
+    <h1>Where the work stands</h1>
+    <p class="byline">September 2026</p>
+
+    <div class="body">
+      <p>This is a plain account of what exists, what we learned building it, and what we are working on now. It is deliberately short on mechanism.</p>
+
+      <h2>What exists</h2>
+      <p>A pipeline that takes ordinary video, from any camera, at any frame rate, and turns it into a normalized record of how the body moved. A forecaster that watches a few seconds of that record and streams a continuation, one frame at a time, for as long as you ask. It runs on a single consumer GPU, fully offline, and the phone capture that prompts it never has to leave the device.</p>
+
+      <p>The forecaster has been evaluated on held-out subjects from a public laboratory corpus and a public dance corpus, and on phone recordings of people the model had never seen, where the real future plays out alongside the forecast and serves as its own ground truth.</p>
+
+      <h2>What we learned</h2>
+      <p>Forecasting motion is mostly a fight against the model&rsquo;s own output. A model that predicts one frame from the last predicts the next frame well and then, fed its own predictions, coasts to a standstill within about a second. It isn&rsquo;t that the motion is gone. The motion is there, shrunk toward the average, because hedging is what squared error rewards. Generating a whole block at once keeps the motion alive, but every place one block hands off to the next leaves a visible seam. A streaming formulation, where the model is trained on corrupted history so that its own mistakes look like noise it already knows how to remove, removed both problems at once.</p>
+
+      <figure>
+        <video src="rollout-three-way.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption>Three generations of the forecaster, same context, same twelve-second horizon. Left: frame-by-frame prediction freezes. Center: block generation moves but pops at every handoff. Right: the streaming model continues without a seam.</figcaption>
+      </figure>
+
+      <p>The learned dynamics travel. Models trained on one kind of capture predict the direction and speed of joint movement about as well on a kind they never saw, whether the source is a studio camera, a depth sensor, or optical motion capture. What does not travel is the prior. The model trained on dance streams an elderly person&rsquo;s walk flawlessly and confidently wrong, because it has never seen anyone move slowly. That is the cleanest statement of where things are: the architecture holds, and what it forecasts well is now a question of what it has seen.</p>
+
+      <h2>What we are working on</h2>
+      <p>A written form for movement. Language became something machines could work with once it had a script. Movement has none, so today it is either raw video, which is heavy and private, or a step count, which has thrown the movement away. We are building the layer in between: a way to write down what a body did that is compact enough to search years of footage, faithful enough to reconstruct the motion, and free of imagery by construction. The forecaster reads and writes it. We will say more once there is more to say.</p>
+
+      <h2>Limits</h2>
+      <p>Everything so far is from a single camera, so depth is compressed. The training corpora are dance and laboratory exercise, not clinical populations. Agreement with expert clinical judgment has not yet been measured. None of these is an architecture problem. All of them are data.</p>
+
+      <p class="note">An earlier, more detailed <a href="research.html">technical overview from July 2026</a> remains available as a dated snapshot. It predates the current work.</p>
+
+      <div class="contact">
+        <p><a href="mailto:contact@lmmtech.ai">contact@lmmtech.ai</a></p>
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <span class="brand">LMM Technologies</span>
+  <span><a href="index.html">lmmtech.ai</a></span>
+</footer>
+
+</body>
+</html>

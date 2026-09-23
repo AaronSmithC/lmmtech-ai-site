@@ -1,0 +1,120 @@
+/* lmmtech.ai — shared styles for the home and work pages.
+   Tokens match the essay pages (Spectral / Fraunces, cream, green, gold). */
+:root{
+  --ink:#1E3A34;
+  --green:#357668;
+  --green-light:#509788;
+  --gold:#a9832a;
+  --gold-soft:#c9a63f;
+  --cream:#F8F6F2;
+  --paper:#FBFAF7;
+  --muted:#5c6f68;
+  --rule:#e3ddd1;
+  --maxw:680px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"Spectral",Georgia,serif;
+  font-size:19px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--green);}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;}
+
+/* top line */
+.top{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:18px;flex-wrap:wrap;
+  padding:28px 0 0;
+  font-size:14px;color:var(--muted);
+}
+.top .brand{
+  font-family:"Fraunces",Georgia,serif;font-weight:500;
+  color:var(--ink);text-decoration:none;letter-spacing:0.02em;
+}
+.top nav a{
+  color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--rule);margin-left:18px;
+}
+.top nav a:hover,.top nav a:focus-visible{color:var(--green);border-color:var(--green);}
+
+/* article with the gold->green rail */
+.article{position:relative;padding:64px 0 40px 26px;}
+.article::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:2px;
+  background:linear-gradient(to bottom,var(--gold) 0%,var(--gold-soft) 12%,var(--green-light) 46%,var(--green) 100%);
+}
+.eyebrow{
+  font-family:"Fraunces",Georgia,serif;font-size:13px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;margin:0 0 20px;
+}
+h1{
+  font-family:"Fraunces",Georgia,serif;font-weight:500;
+  font-size:clamp(34px,6vw,52px);line-height:1.08;letter-spacing:-0.01em;
+  margin:0 0 14px;
+}
+h2{
+  font-family:"Fraunces",Georgia,serif;font-weight:500;
+  font-size:clamp(22px,3.4vw,27px);line-height:1.25;
+  margin:2.8rem 0 0.8rem;
+}
+.byline{
+  font-size:15px;color:var(--muted);
+  margin:26px 0 0;padding-bottom:30px;border-bottom:1px solid var(--rule);
+}
+.body{padding-top:34px;}
+.body p{margin:0 0 1.35em;hanging-punctuation:first;}
+.lead{
+  font-family:"Fraunces",Georgia,serif;font-weight:500;
+  font-size:clamp(21px,3.4vw,26px);line-height:1.35;color:var(--gold);
+  margin:0 0 1.6em;
+}
+
+/* reading list */
+.list{list-style:none;padding:0;margin:0;}
+.list li{padding:14px 0;border-bottom:1px solid var(--rule);}
+.list li:first-child{border-top:1px solid var(--rule);}
+.list a{
+  font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:20px;
+  color:var(--ink);text-decoration:none;
+}
+.list a:hover,.list a:focus-visible{color:var(--green);}
+.list .kind{
+  display:block;font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2px;
+}
+.list .desc{display:block;font-size:16px;color:var(--muted);line-height:1.5;margin-top:4px;}
+
+/* media */
+figure{margin:2.4rem 0;}
+figure video,figure img{width:100%;height:auto;display:block;border:1px solid var(--rule);background:#fff;}
+figcaption{margin-top:9px;font-size:13.5px;color:var(--muted);line-height:1.5;}
+
+.note{font-size:16px;color:var(--muted);}
+.contact{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--rule);}
+
+footer{
+  max-width:var(--maxw);margin:0 auto;padding:90px 26px;
+  color:var(--muted);font-size:14px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap;
+}
+footer .brand{font-family:"Fraunces",Georgia,serif;font-weight:500;color:var(--ink);letter-spacing:0.02em;}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule);}
+footer a:hover,footer a:focus-visible{color:var(--green);border-color:var(--green);}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+@media (max-width:760px){.article{padding-left:20px;}}
+@media (max-width:600px){
+  body{font-size:18px;}
+  .article{padding-top:44px;}
+  .top nav a{margin-left:14px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .article{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+}
