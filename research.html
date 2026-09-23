@@ -45,6 +45,8 @@
 <main class="section">
 <article class="prose wrap">
 
+  <p style="margin:0 0 2.5rem;padding:1rem 1.25rem;border-left:3px solid #a9832a;background:rgba(169,131,42,0.07);font-size:0.95rem;line-height:1.6;"><strong>Archived snapshot, July 2026.</strong> This overview predates the current work and its results have since been superseded. For where things stand now, see <a href="work.html">Where the work stands</a>.</p>
+
   <!-- 1 -->
   <h2>1. Introduction</h2>
   <p class="prose-lead">Human movement is one of the richest natural signals available. It encodes health status, task intent, emotional state, motor skill, and physical capability. Yet no unified AI framework has treated motion as a general-purpose sequence domain — one where the same foundational model can serve rehabilitation assessment, sports analytics, robotics control, and human–computer interaction.</p>
@@ -233,14 +235,11 @@
   <h2>6. Cross-Domain Transfer</h2>
   <p>The pipeline and architectures are domain-agnostic by design — the skeleton, normalization, and tokenization make no assumption about what kind of movement is analyzed. But does the model actually transfer, or just memorize the training distribution?</p>
 
-  <h3>6.1 Held-out generalization test</h3>
+  <h3>Held-out generalization test</h3>
   <p>We evaluated trained models against a held-out corpus from a fundamentally different capture modality: optical motion capture of physical-therapy exercises (Vicon, 10 exercises, 10 subjects). The model never saw this data in training, and its characteristics are visually distinct — no camera perspective, no detection jitter, no confidence variation.</p>
   <div class="callout">
     <strong>Key finding: motion dynamics transfer across domains.</strong> Per-frame velocity MSE — whether the model predicts the <em>direction and speed</em> of joint movement correctly — was essentially identical across all tested models (0.011–0.014), regardless of whether they trained on dance video, clinical footage, or a multi-source combination. Absolute position errors varied by domain (coordinate systems and projection geometry differ), but the underlying motion structure transferred.
   </div>
-
-  <h3>6.2 Scheduled sampling as a transfer mechanism</h3>
-  <p>An unexpected result: scheduled sampling — introduced to reduce autoregressive drift — turns out to be a powerful cross-domain transfer mechanism. Models trained with it showed 54% lower teacher-forced error on held-out data than identical models trained without it. The interpretation: scheduled sampling forces the model to predict from imperfect inputs, and cross-domain inputs are inherently imperfect; models that learn to handle imperfect inputs generalize better.</p>
 
   <hr class="divider" />
 
