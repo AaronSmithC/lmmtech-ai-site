@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Someone Turned It On</title>
+<meta name="description" content="The tool can&rsquo;t be fired, sued, or jailed. Accountability lands where it always has: on the person who pressed go.">
+<meta property="og:title" content="Someone Turned It On">
+<meta property="og:description" content="A large language model is a file. It never starts. Every run begins with a person.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,560&family=Newsreader:ital,opsz,wght@0,6..72,380;0,6..72,500;1,6..72,380&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink-bg: #0a0a0c;
+    --bone: #e6e1d6;
+    --bone-dim: #9a968c;
+    --ember: #d4763b;
+    --silver: #7e838d;
+    --hairline: rgba(230, 225, 214, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    background: var(--ink-bg);
+    color: var(--bone);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 380;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Hero: the archival plate ---------- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 35%, #17171b 0%, var(--ink-bg) 70%);
+  }
+  .hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.82);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.15) 0%, rgba(10,10,12,0.0) 38%, rgba(10,10,12,0.93) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 4.5rem;
+    width: 100%;
+  }
+  .plate-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 17ch;
+  }
+  .dek {
+    margin-top: 1.3rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--bone-dim);
+    max-width: 42ch;
+  }
+  .byline {
+    margin-top: 2.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+  }
+  .byline span { color: var(--bone-dim); }
+
+  /* ---------- Essay body ---------- */
+  .essay {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+  .essay p {
+    margin-bottom: 1.6rem;
+  }
+  .essay p:first-of-type {
+    font-size: 1.35rem;
+  }
+  .essay em { font-style: italic; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 3.4rem 0 1.6rem;
+    color: var(--bone);
+  }
+
+  .beat {
+    font-family: 'Fraunces', serif;
+    font-weight: 340;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--bone);
+    margin: 3rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--ember);
+  }
+
+  /* ---------- Figures as archival plates ---------- */
+  figure {
+    margin: 4rem calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+  }
+  figure .frame {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--hairline);
+  }
+  figcaption {
+    max-width: 52rem;
+    margin: 0.9rem auto 0;
+    padding: 0 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  figcaption .cap-id { color: var(--ember); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  footer p {
+    padding-top: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--silver);
+    line-height: 2;
+  }
+  footer a { color: var(--bone-dim); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  footer a:hover, footer a:focus-visible { color: var(--ember); border-color: var(--ember); }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .essay p:first-of-type { font-size: 1.2rem; }
+    .beat { font-size: 1.25rem; }
+    h2 { font-size: 1.6rem; }
+    .hero { min-height: 72vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="the-file.png" alt="A single reel of magnetic tape lying flat on a worn steel bench, lit from one side against a dark wall. Nothing else in frame.">
+  <div class="hero-inner">
+    <div class="plate-label">Plate I &mdash; The file, when nobody is calling it</div>
+    <h1>Someone Turned It On</h1>
+    <p class="dek">The tool can&rsquo;t be fired, sued, or jailed. Accountability lands where it always has.</p>
+    <p class="byline">Aaron Smith <span>&middot;</span> September 2026 <span>&middot;</span> ~4 min</p>
+  </div>
+</header>
+
+<main class="essay">
+
+  <p>Progress is continuous, but it doesn&rsquo;t feel that way. Most days the ground moves an inch. Then something arrives and covers a mile. The transistor was one of those. This is another.</p>
+
+  <p>We&rsquo;re in the adjustment now, and it&rsquo;s going the way adjustments go.</p>
+
+  <p>Some people were sure these tools would take their jobs. Many of them found the opposite: the work got easier, they build more, and they build it faster. Others used the tools to make a job that didn&rsquo;t exist, one person doing what used to take a team. And some jobs are going away. That&rsquo;s true of every leap, and pretending otherwise doesn&rsquo;t help the people it&rsquo;s happening to.</p>
+
+  <p>Some people will use the tools to do harm. That&rsquo;s also true of every leap.</p>
+
+  <h2>What the thing is</h2>
+
+  <p>What surprises me is how few people understand what the thing is. They think there&rsquo;s a brain in there. Hopes, dreams, emotions, ambitions. They talk about what it wants.</p>
+
+  <p>Here is what it is. A large language model is a file. A very big one, full of numbers, sitting on a disk. When nobody is calling it, it does nothing. It isn&rsquo;t waiting. It isn&rsquo;t wondering about love or the secrets of the universe. There is no &ldquo;in there&rdquo; between one request and the next.</p>
+
+  <p>A brain is a different kind of thing. A brain never stops. It exists when it&rsquo;s doing nothing at all, and it generates its own wants. Leave a person alone in a room and they&rsquo;ll start something. Leave a model alone and it&rsquo;s a file.</p>
+
+  <p>The hopes and ambitions people hear in the output came from people. The model learned from what we wrote, and we wrote about what we want.</p>
+
+  <p>What happens while it runs is an argument worth having. It doesn&rsquo;t change anything that follows.</p>
+
+  <h2>Every run begins with a person</h2>
+
+  <p>The tool needs direction. That doesn&rsquo;t mean hand-holding. It means someone sets the goal and asks. Give it access to your files, your accounts, a budget, and it will work for hours and make choices you never anticipated. But it never starts. Every run begins with a person.</p>
+
+  <p>Someone will say: put it in a loop, give it memory, and it never stops. Fine. Someone wrote the loop.</p>
+
+  <p class="beat">Someone turned it on.</p>
+
+  <p>That&rsquo;s where accountability sits. The tool can&rsquo;t be fired, sued, or jailed. It has nothing to lose, and accountability requires something to lose. So it lands where it always has, on the person who set the goal, granted the access, and pressed go. An employer answers for what&rsquo;s done in the company&rsquo;s name. An owner answers for the dog.</p>
+
+  <figure>
+    <div class="frame">
+      <img src="off-the-leash.png" loading="lazy" alt="A leash coiled on a brass hook beside a dark front door, in low evening light. The dog is out of frame.">
+    </div>
+    <figcaption>
+      <span class="cap-id">Plate II</span>
+      <span>An owner answers for the dog</span>
+    </figcaption>
+  </figure>
+
+  <p>&ldquo;It did that on its own&rdquo; is going to be said in a lot of courtrooms and boardrooms. It shouldn&rsquo;t work.</p>
+
+  <p class="beat">The tools can act. Only people can answer for it.</p>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aaron Smith &middot; <a href="index.html">lmmtech.ai</a></p>
+</footer>
+
+</body>
+</html>
