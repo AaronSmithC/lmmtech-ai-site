@@ -41,7 +41,7 @@
       <h2>What exists</h2>
       <p>A written form for movement. In September it was something we were building; a clip of movement can now be written down and read back. At full fidelity the read-back is indistinguishable from the original by eye, and the written record is about a tenth the size of the keypoints it came from and a small fraction of a video. It has been checked clip by clip on five public corpora and on phone captures, and the same writing serves every camera, frame rate and source we have.</p>
 
-      <p>A language model that reads that writing. It is a plain next-word model, trained in hours on one consumer GPU, and given eight seconds of a clip it writes what comes next, one word at a time, for as long as asked.</p>
+      <p>A language model that reads that writing. It is a plain next-word model, and given eight seconds of a clip it writes what comes next, one word at a time, for as long as asked.</p>
 
       <p>A pipeline that takes ordinary video, from any camera, at any frame rate, and turns it into a normalized record of how the body moved. A forecaster that watches a few seconds of that record and streams a continuation, one frame at a time, for as long as you ask. It runs on a single consumer GPU, fully offline, and the phone capture that prompts it never has to leave the device.</p>
 
@@ -63,7 +63,7 @@
 
       <h2>What we are working on</h2>
       <p>The work now is on what reads and writes the written form. The first model is small and was trained on a few corpora; the next ones train on more, including the slow and deliberate movement the current ones have never seen.</p>
-      <p>Removing the imagery is not the same as removing the person. Two people taking the same step do not take it the same way, and that difference alone can identify someone. In the written form the two land in different parts of the record, so the person&rsquo;s own manner is something a reader can keep or leave out, rather than something the record always carries. We will say more once there is more to say.</p>
+      <p>Removing the imagery is not the same as removing the person. Two people taking the same step do not take it the same way, and that difference alone can identify someone. We will say more once there is more to say.</p>
 
       <h2>Limits</h2>
       <p>Everything so far is from a single camera, so depth is compressed, and the same movement seen from another camera is written differently. The training corpora are dance, fitness and laboratory exercise, not clinical populations. Agreement with expert clinical judgment has not yet been measured. A written future is one guess among many, so a single forecast should be read as a possibility, not a prediction. None of these is an architecture problem. All of them are data, or ways of reading what the model says.</p>
