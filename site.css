@@ -95,6 +95,18 @@ figure{margin:2.4rem 0;}
 figure video,figure img{width:100%;height:auto;display:block;border:1px solid var(--rule);background:#fff;}
 figcaption{margin-top:9px;font-size:13.5px;color:var(--muted);line-height:1.5;}
 
+/* lists and code in body text (MovementModeler pages) */
+.body ul,.body ol{margin:0 0 1.35em;padding-left:1.2em;}
+.body li{margin:0 0 0.4em;}
+.body h3{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:20px;line-height:1.3;margin:1.8rem 0 0.4rem;}
+pre{
+  margin:0 0 1.35em;padding:16px 18px;overflow-x:auto;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:14px;line-height:1.55;color:var(--ink);
+}
+code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:0.86em;}
+figure.phone video,figure.phone img{max-width:340px;margin:0 auto;}
+
 .note{font-size:16px;color:var(--muted);}
 .contact{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--rule);}
 
