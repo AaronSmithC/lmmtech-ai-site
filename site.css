@@ -106,6 +106,10 @@ pre{
 }
 code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:0.86em;}
 figure.phone video,figure.phone img{max-width:340px;margin:0 auto;}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+.pair figure{margin:0;}
+@media (max-width:600px){.pair{grid-template-columns:1fr;}}
+.app-icon{width:88px;height:88px;border-radius:20px;display:block;margin:0 0 22px;}
 
 .note{font-size:16px;color:var(--muted);}
 .contact{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--rule);}
